@@ -8,6 +8,7 @@ package FrontEnd;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,7 +45,8 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -103,6 +105,11 @@ public class Login extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loginicono.png"))); // NOI18N
         jButton1.setText("Ingresar");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 100, 30));
 
         jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
@@ -158,6 +165,15 @@ public class Login extends javax.swing.JFrame {
     private void jPasswordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseClicked
         jPasswordField1.setText("");
     }//GEN-LAST:event_jPasswordField1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTextField1.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese el usuario");
+        }
+        if(jPasswordField1.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la contraseña");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
