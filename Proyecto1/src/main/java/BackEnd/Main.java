@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MainPackage;
+package BackEnd;
 
+import FrontEnd.CargarArchivo;
 import FrontEnd.Ingresar;
 import FrontEnd.Login;
 
@@ -17,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
         Ingresar ingresar = new Ingresar();
         ingresar.setVisible(true);
+        CargarArchivo cargar= new CargarArchivo();
+        cargar.setVisible(true);
     }
-    
-    
 }

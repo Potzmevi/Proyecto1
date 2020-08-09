@@ -5,9 +5,6 @@
  */
 package FrontEnd;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -211,11 +208,6 @@ public class Login extends javax.swing.JFrame {
         });
     }
 
-    public void cargarImagenes(String nombre, JLabel label) {
-        ImageIcon imagen = (new ImageIcon(getClass().getClassLoader().getResource(nombre)));
-        ImageIcon imagenfinal = new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
-        label.setIcon(imagenfinal);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
