@@ -5,6 +5,9 @@
  */
 package FrontEnd;
 
+import BaseDeDatos.Conexion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author potz
@@ -43,24 +46,32 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        fabricantetxt = new javax.swing.JTextField();
+        nombretxt = new javax.swing.JTextField();
+        preciotxt = new javax.swing.JFormattedTextField();
+        garantiatxt = new javax.swing.JTextField();
+        descripciontxt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        codigotxt = new javax.swing.JTextField();
+        cantidadtxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Producto");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Ingresar Producto:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jLabel2.setText("Garantia (meses)");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 130, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Codigo.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 30, 30));
@@ -111,49 +122,41 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel16.setOpaque(true);
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 30, 30));
 
-        jTextField3.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField3.setText("Fabricante");
-        jTextField3.setBorder(null);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 160, 30));
+        fabricantetxt.setBackground(new java.awt.Color(153, 153, 153));
+        fabricantetxt.setForeground(new java.awt.Color(102, 102, 102));
+        fabricantetxt.setBorder(null);
+        jPanel1.add(fabricantetxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 160, 30));
 
-        jTextField2.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText("Nombre");
-        jTextField2.setBorder(null);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 160, 30));
+        nombretxt.setBackground(new java.awt.Color(153, 153, 153));
+        nombretxt.setForeground(new java.awt.Color(102, 102, 102));
+        nombretxt.setBorder(null);
+        jPanel1.add(nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 160, 30));
 
-        jTextField4.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField4.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField4.setText("Garantia (meses)");
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 160, 30));
+        preciotxt.setBackground(new java.awt.Color(153, 153, 153));
+        preciotxt.setBorder(null);
+        preciotxt.setForeground(new java.awt.Color(102, 102, 102));
+        preciotxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jPanel1.add(preciotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 160, 30));
 
-        jFormattedTextField2.setBackground(new java.awt.Color(153, 153, 153));
-        jFormattedTextField2.setBorder(null);
-        jFormattedTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField2.setText("123456");
-        jPanel1.add(jFormattedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 160, 30));
+        garantiatxt.setBackground(new java.awt.Color(153, 153, 153));
+        garantiatxt.setForeground(new java.awt.Color(102, 102, 102));
+        garantiatxt.setBorder(null);
+        garantiatxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                garantiatxtKeyTyped(evt);
+            }
+        });
+        jPanel1.add(garantiatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 160, 30));
 
-        jFormattedTextField3.setBackground(new java.awt.Color(153, 153, 153));
-        jFormattedTextField3.setBorder(null);
-        jFormattedTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField3.setText("123456");
-        jPanel1.add(jFormattedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 160, 30));
+        descripciontxt.setBackground(new java.awt.Color(153, 153, 153));
+        descripciontxt.setForeground(new java.awt.Color(102, 102, 102));
+        descripciontxt.setBorder(null);
+        jPanel1.add(descripciontxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 160, 30));
 
-        jTextField5.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField5.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField5.setText("Codigo");
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 30));
-
-        jTextField6.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField6.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField6.setText("Descripcion");
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 160, 30));
+        jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel17.setText("Ingresar Producto:");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
@@ -166,6 +169,51 @@ public class CrearProducto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 100, 30));
+
+        jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setText("*Nombre:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 70, 30));
+
+        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel19.setText("*Fabricante:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 90, 30));
+
+        jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel20.setText("*Codigo:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 70, 30));
+
+        jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel21.setText("*Cantidad:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 80, 30));
+
+        jLabel22.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel22.setText("*Precio:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 60, 30));
+
+        jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel23.setText("Descripcion:");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 100, 30));
+
+        codigotxt.setBackground(new java.awt.Color(153, 153, 153));
+        codigotxt.setForeground(new java.awt.Color(102, 102, 102));
+        codigotxt.setBorder(null);
+        jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 160, 30));
+
+        cantidadtxt.setBackground(new java.awt.Color(153, 153, 153));
+        cantidadtxt.setForeground(new java.awt.Color(102, 102, 102));
+        cantidadtxt.setBorder(null);
+        cantidadtxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidadtxtKeyTyped(evt);
+            }
+        });
+        jPanel1.add(cantidadtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 160, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoProducto.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 400));
@@ -185,8 +233,46 @@ public class CrearProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (nombretxt.getText().length() == 0 || fabricantetxt.getText().length() == 0 || codigotxt.getText().length() == 0 || cantidadtxt.getText().length() == 0 || preciotxt.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos obligatorios");
+        } else {
+            String nombre = nombretxt.getText();
+            String fabricante = fabricantetxt.getText();
+            String codigo = codigotxt.getText();
+            int cantidad = Integer.parseInt(cantidadtxt.getText());
+            Double precio = Double.parseDouble(preciotxt.getText());
+            String descripcion = descripciontxt.getText();
+            int garantia;
+            if (garantiatxt.getText().length() == 0) {
+                garantia = 0;
+            } else {
+                garantia = Integer.parseInt(garantiatxt.getText());
+            }
+            String query = ("INSERT INTO PRODUCTO VALUES('" + codigo + "','" + nombre + "','" + fabricante + "','" + cantidad + "','" + precio + "','" + descripcion + "','" + garantia + "','" + MenuEmpresa.codigoTiendaOrigen + "')");
+            Conexion conexion = new Conexion();
+            conexion.Insert(query);
+            codigotxt.setText("");
+            nombretxt.setText("");
+            fabricantetxt.setText("");
+            cantidadtxt.setText("");
+            preciotxt.setText("");
+            descripciontxt.setText("");
+            garantiatxt.setText("");
 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cantidadtxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadtxtKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9')
+            evt.consume();
+    }//GEN-LAST:event_cantidadtxtKeyTyped
+
+    private void garantiatxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_garantiatxtKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9')
+            evt.consume();
+    }//GEN-LAST:event_garantiatxtKeyTyped
 
     /**
      * @param args the command line arguments
@@ -225,9 +311,12 @@ public class CrearProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cantidadtxt;
+    private javax.swing.JTextField codigotxt;
+    private javax.swing.JTextField descripciontxt;
+    private javax.swing.JTextField fabricantetxt;
+    private javax.swing.JTextField garantiatxt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -236,7 +325,14 @@ public class CrearProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -245,10 +341,7 @@ public class CrearProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nombretxt;
+    private javax.swing.JFormattedTextField preciotxt;
     // End of variables declaration//GEN-END:variables
 }

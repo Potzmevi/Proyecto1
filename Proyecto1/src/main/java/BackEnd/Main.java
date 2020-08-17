@@ -5,10 +5,13 @@
  */
 package BackEnd;
 
+import BaseDeDatos.Conexion;
 import FrontEnd.CargarArchivo;
 import FrontEnd.Ingresar;
 import FrontEnd.Login;
 import FrontEnd.CrearTiempo;
+import FrontEnd.CrearTienda;
+import FrontEnd.MenuEmpresa;
 
 
 /**
@@ -17,9 +20,9 @@ import FrontEnd.CrearTiempo;
  */
 public class Main {
     public static void main(String[] args) {
-        Ingresar ingresar = new Ingresar();
-        ingresar.setVisible(true);
-        CrearTiempo tiempo = new CrearTiempo();
-        tiempo.setVisible(true);
+        MenuEmpresa menu = new MenuEmpresa();
+        menu.setVisible(true);
+        Conexion conexion = new Conexion();
+        conexion.conexionDB();
     }
 }

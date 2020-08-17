@@ -5,6 +5,9 @@
  */
 package FrontEnd;
 
+import BaseDeDatos.Conexion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author potz
@@ -35,27 +38,35 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jTextField4 = new javax.swing.JTextField();
+        creditoformatted = new javax.swing.JFormattedTextField();
+        codigotxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        telefonotxt = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        nittxt = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        dpitxt = new javax.swing.JTextField();
+        direcciontxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        nombretxt = new javax.swing.JTextField();
+        correotxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -66,12 +77,22 @@ public class CrearUsuario extends javax.swing.JFrame {
         jRadioButton1.setForeground(new java.awt.Color(51, 51, 51));
         jRadioButton1.setText("Cliente");
         jRadioButton1.setOpaque(false);
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
 
         jRadioButton2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(51, 51, 51));
         jRadioButton2.setText("Empleados");
         jRadioButton2.setOpaque(false);
+        jRadioButton2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton2StateChanged(evt);
+            }
+        });
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -81,8 +102,8 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Crear Usuario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jLabel2.setText("Credito:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -106,18 +127,16 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel4.setOpaque(true);
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 30, 30));
 
-        jFormattedTextField1.setBackground(new java.awt.Color(153, 153, 153));
-        jFormattedTextField1.setBorder(null);
-        jFormattedTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField1.setText("12345");
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 200, 30));
+        creditoformatted.setBackground(new java.awt.Color(153, 153, 153));
+        creditoformatted.setBorder(null);
+        creditoformatted.setForeground(new java.awt.Color(102, 102, 102));
+        creditoformatted.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jPanel1.add(creditoformatted, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 200, 30));
 
-        jTextField4.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField4.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField4.setText("Codigo del Empleado");
-        jTextField4.setBorder(null);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 200, 30));
+        codigotxt.setBackground(new java.awt.Color(153, 153, 153));
+        codigotxt.setForeground(new java.awt.Color(102, 102, 102));
+        codigotxt.setBorder(null);
+        jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 200, 30));
 
         jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
@@ -135,29 +154,26 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Direccion.png"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 30, 30));
 
-        jTextField3.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField3.setText("Nombre");
-        jTextField3.setBorder(null);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        telefonotxt.setBackground(new java.awt.Color(153, 153, 153));
+        telefonotxt.setForeground(new java.awt.Color(102, 102, 102));
+        telefonotxt.setBorder(null);
+        telefonotxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                telefonotxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 200, 30));
+        telefonotxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonotxtKeyTyped(evt);
+            }
+        });
+        jPanel1.add(telefonotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 200, 30));
 
         jLabel18.setBackground(new java.awt.Color(153, 153, 153));
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 51, 51));
         jLabel18.setOpaque(true);
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 30, 30));
-
-        jFormattedTextField2.setBackground(new java.awt.Color(153, 153, 153));
-        jFormattedTextField2.setBorder(null);
-        jFormattedTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField2.setText("12345");
-        jPanel1.add(jFormattedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 200, 30));
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
@@ -170,11 +186,10 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel12.setOpaque(true);
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 30, 30));
 
-        jTextField6.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField6.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField6.setText("NIT");
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 200, 30));
+        nittxt.setBackground(new java.awt.Color(153, 153, 153));
+        nittxt.setForeground(new java.awt.Color(102, 102, 102));
+        nittxt.setBorder(null);
+        jPanel1.add(nittxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 200, 30));
 
         jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
@@ -198,17 +213,20 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel15.setOpaque(true);
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 30, 30));
 
-        jTextField7.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField7.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField7.setText("Correo");
-        jTextField7.setBorder(null);
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 200, 30));
+        dpitxt.setBackground(new java.awt.Color(153, 153, 153));
+        dpitxt.setForeground(new java.awt.Color(102, 102, 102));
+        dpitxt.setBorder(null);
+        dpitxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dpitxtKeyTyped(evt);
+            }
+        });
+        jPanel1.add(dpitxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 200, 30));
 
-        jTextField5.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField5.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField5.setText("Direccion:");
-        jTextField5.setBorder(null);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 200, 30));
+        direcciontxt.setBackground(new java.awt.Color(153, 153, 153));
+        direcciontxt.setForeground(new java.awt.Color(102, 102, 102));
+        direcciontxt.setBorder(null);
+        jPanel1.add(direcciontxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 200, 30));
 
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
@@ -221,13 +239,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel8.setOpaque(true);
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 30, 30));
 
-        jFormattedTextField3.setBackground(new java.awt.Color(153, 153, 153));
-        jFormattedTextField3.setBorder(null);
-        jFormattedTextField3.setForeground(new java.awt.Color(102, 102, 102));
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        jFormattedTextField3.setText("12345");
-        jPanel1.add(jFormattedTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 200, 30));
-
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loginicono.png"))); // NOI18N
@@ -239,6 +250,61 @@ public class CrearUsuario extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 100, 30));
+
+        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel19.setText("Crear Usuario");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel20.setText("Codigo:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 70, 30));
+
+        jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel21.setText(" Nombre:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 70, 30));
+
+        jLabel22.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel22.setText(" Telefono:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 80, 30));
+
+        jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel23.setText("        NIT:");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 80, 30));
+
+        jLabel24.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel24.setText("       DPI:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 80, 30));
+
+        jLabel25.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel25.setText(" Correo:");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 80, 30));
+
+        jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel26.setText(" Direccion:");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 100, 30));
+
+        nombretxt.setBackground(new java.awt.Color(153, 153, 153));
+        nombretxt.setForeground(new java.awt.Color(102, 102, 102));
+        nombretxt.setBorder(null);
+        nombretxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombretxtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 200, 30));
+
+        correotxt.setBackground(new java.awt.Color(153, 153, 153));
+        correotxt.setForeground(new java.awt.Color(102, 102, 102));
+        correotxt.setBorder(null);
+        jPanel1.add(correotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 200, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoUsuario.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 410));
@@ -257,17 +323,125 @@ public class CrearUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void telefonotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonotxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_telefonotxtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jRadioButton1.isSelected() == false && jRadioButton2.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione si desea ingresar un cliente o un empleado");
+        } else {
+            if (jRadioButton2.isSelected() == true) {
+                if (nombretxt.getText().length() == 0 || telefonotxt.getText().length() == 0 || dpitxt.getText().length() == 0 || correotxt.getText().length() == 0 || direcciontxt.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos obligatorios del trabajador");
+                } else {
+                    if (codigotxt.getText().length() == 0) {
+                        JOptionPane.showMessageDialog(null, "Por favor ingrese el codigo del trabajador");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "todo correcto empleado");
+                        String nombre = nombretxt.getText();
+                        String direccion = direcciontxt.getText();
+                        String codigo = codigotxt.getText();
+                        String telefono = telefonotxt.getText();
+                        String correo = correotxt.getText();
+                        String nit = nittxt.getText();
+                        String dpi = dpitxt.getText();
+                        String query = ("INSERT INTO EMPLEADO VALUES('" + codigo + "','" + nombre + "','" + telefono + "','" + nit + "','" + dpi + "','" + correo + "','" + direccion + "')");
+                        Conexion conexion = new Conexion();
+                        conexion.Insert(query);
+                        Reiniciar();
+                    }
+                }
+            } else if (jRadioButton1.isSelected() == true) {
+                if (nombretxt.getText().length() == 0 || telefonotxt.getText().length() == 0 || nittxt.getText().length() == 0) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos obligatorios del usuario");
+                } else {
+                    JOptionPane.showMessageDialog(null, "todo correcto cliente");
+                    String nombre = nombretxt.getText();
+                    String direccion = direcciontxt.getText();
+                    String telefono = telefonotxt.getText();
+                    String correo = correotxt.getText();
+                    String nit = nittxt.getText();
+                    String dpi = dpitxt.getText();
+                    Double credito;
+                    if (creditoformatted.getText().length() == 0) {
+                        credito = 0.0;
+                    } else {
+                        credito = Double.parseDouble(creditoformatted.getText());
+                    }
+                    String query = ("INSERT INTO CLIENTE VALUES('" + nit + "','" + nombre + "','" + telefono + "','" + dpi + "','" + credito + "','" + correo + "','" + direccion + "')");
+                    Conexion conexion = new Conexion();
+                    conexion.Insert(query);
+                    Reiniciar();
+                }
+            }
 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void Reiniciar() {
+        codigotxt.setText("");
+        nombretxt.setText("");
+        telefonotxt.setText("");
+        nittxt.setText("");
+        dpitxt.setText("");
+        correotxt.setText("");
+        direcciontxt.setText("");
+        creditoformatted.setText("");
+    }
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        
+        jRadioButton1.setSelected(false);
+        codigotxt.setVisible(true);
+        jLabel9.setVisible(true);
+        jLabel10.setVisible(true);
+        jLabel20.setVisible(true);
+        creditoformatted.setVisible(false);
+        jLabel7.setVisible(false);
+        jLabel8.setVisible(false);
+        jLabel2.setVisible(false);
+        creditoformatted.setText("");
+        Reiniciar();
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void nombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombretxtActionPerformed
+
+    private void jRadioButton2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton2StateChanged
+
+    }//GEN-LAST:event_jRadioButton2StateChanged
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        jRadioButton2.setSelected(false);
+        codigotxt.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
+        jLabel20.setVisible(false);
+        codigotxt.setText("");
+        creditoformatted.setVisible(true);
+        jLabel7.setVisible(true);
+        jLabel8.setVisible(true);
+        jLabel2.setVisible(true);
+        Reiniciar();
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void telefonotxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonotxtKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+        if (telefonotxt.getText().length() == 13)
+            evt.consume();
+    }//GEN-LAST:event_telefonotxtKeyTyped
+
+    private void dpitxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dpitxtKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+        if (dpitxt.getText().length() == 13)
+            evt.consume();
+    }//GEN-LAST:event_dpitxtKeyTyped
 
     /**
      * @param args the command line arguments
@@ -306,10 +480,12 @@ public class CrearUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codigotxt;
+    private javax.swing.JTextField correotxt;
+    private javax.swing.JFormattedTextField creditoformatted;
+    private javax.swing.JTextField direcciontxt;
+    private javax.swing.JTextField dpitxt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -320,7 +496,15 @@ public class CrearUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -331,10 +515,8 @@ public class CrearUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField nittxt;
+    private javax.swing.JTextField nombretxt;
+    private javax.swing.JTextField telefonotxt;
     // End of variables declaration//GEN-END:variables
 }
