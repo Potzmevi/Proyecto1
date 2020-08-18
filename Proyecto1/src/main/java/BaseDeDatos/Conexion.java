@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    public static final int MYSQL_ERROR= 1062;
+    public static final int MYSQL_ERROR = 1062;
     Connection conexion = null;
     private final String driver = "com.mysql.jdbc.Driver";
     String user = "root";
     String password = "juanpablo07";
-    private final String url = "jdbc:mysql://localhost/INTELAF?useSSL=false";
+    private final String url = "jdbc:mysql://localhost:3306/INTELAF";
 
     ;
 
@@ -62,7 +62,6 @@ public class Conexion {
             disconnectDB();
         } catch (SQLException e) {
             if (e.getErrorCode() == MYSQL_ERROR) {
-                System.out.println("entraaa");
                 JOptionPane.showMessageDialog(null, "Error, el codigo de tienda ya existe.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error " + e);
@@ -70,7 +69,49 @@ public class Conexion {
         }
 
     }
-    public ResultSet ComboBox(String query){
+
+    public ResultSet ComboBox(String query) {
+        Statement stmt = null;
+        try {
+            conexionDB();
+            stmt = null;
+            stmt = getConnection().createStatement();
+            ResultSet result = stmt.executeQuery(query);
+            return result;
+        } catch (Exception e) {
+            return null;
+
+        }
+    }
+
+    public int InsertVenta(String query) {
+        int numero=0;
+        int resultado = -1;
+        try {
+            conexionDB();
+            Statement stmt = null;
+            stmt = getConnection().createStatement();
+            numero = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                resultado = rs.getInt(1);
+            }
+            rs.close();
+
+            stmt.close();
+            disconnectDB();
+        } catch (SQLException e) {
+            if (e.getErrorCode() == MYSQL_ERROR) {
+                JOptionPane.showMessageDialog(null, "Error el ID o codigo ya existe");
+            } else {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        return resultado;
+    }
+
+    public ResultSet Table(String query) {
         Statement stmt = null;
         try {
             conexionDB();

@@ -83,6 +83,11 @@ public class MenuEmpresa extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventas.png"))); // NOI18N
         jButton4.setText("Ventas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconotiende.png"))); // NOI18N
@@ -165,6 +170,12 @@ public class MenuEmpresa extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_formComponentShown
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        CrearVenta venta = new CrearVenta();
+        venta.setVisible(true);
+        codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
