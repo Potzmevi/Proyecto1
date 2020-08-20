@@ -5,6 +5,7 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
 import BaseDeDatos.Conexion;
 import java.sql.ResultSet;
 import java.util.Calendar;
@@ -142,8 +143,7 @@ public class CrearTiempo extends javax.swing.JFrame {
         }else{
             String tienda_destino=String.valueOf(combonombre.getSelectedItem());
             String query = ("INSERT INTO TIEMPO_TIENDA VALUES('"+0+"','"+combotiempo.getText()+"','"+tienda_destino+"','"+MenuEmpresa.codigoTiendaOrigen+"')");
-            Conexion conexion = new Conexion();
-            conexion.Insert(query);
+            Main.conexion.Insert(query);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

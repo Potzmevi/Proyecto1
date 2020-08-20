@@ -19,10 +19,11 @@ import FrontEnd.MenuEmpresa;
  * @author potz
  */
 public class Main {
+    public static Conexion conexion = new Conexion();
+        
     public static void main(String[] args) {
         MenuEmpresa menu = new MenuEmpresa();
         menu.setVisible(true);
-        Conexion conexion = new Conexion();
         conexion.conexionDB();
     }
 }

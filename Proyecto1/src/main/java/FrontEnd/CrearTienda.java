@@ -5,6 +5,7 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
 import BaseDeDatos.Conexion;
 import javax.swing.JOptionPane;
 
@@ -424,8 +425,7 @@ public class CrearTienda extends javax.swing.JFrame {
             String correo= correotxt.getText();
             String horario=horariotxt.getText();
             String query = ("INSERT INTO TIENDA VALUES('"+codigo+"','"+nombre+"','"+direccion+"','"+telefono1+"','"+telefono2+"','"+correo+"','"+horario+"')");
-            Conexion conexion = new Conexion();
-            conexion.Insert(query);
+            Main.conexion.Insert(query);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

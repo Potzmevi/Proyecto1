@@ -5,6 +5,7 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
 import BaseDeDatos.Conexion;
 import javax.swing.JOptionPane;
 
@@ -347,8 +348,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                         String nit = nittxt.getText();
                         String dpi = dpitxt.getText();
                         String query = ("INSERT INTO EMPLEADO VALUES('" + codigo + "','" + nombre + "','" + telefono + "','" + nit + "','" + dpi + "','" + correo + "','" + direccion + "')");
-                        Conexion conexion = new Conexion();
-                        conexion.Insert(query);
+                        Main.conexion.Insert(query);
                         Reiniciar();
                     }
                 }
@@ -370,8 +370,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                         credito = Double.parseDouble(creditoformatted.getText());
                     }
                     String query = ("INSERT INTO CLIENTE VALUES('" + nit + "','" + nombre + "','" + telefono + "','" + dpi + "','" + credito + "','" + correo + "','" + direccion + "')");
-                    Conexion conexion = new Conexion();
-                    conexion.Insert(query);
+                    Main.conexion.Insert(query);
                     Reiniciar();
                 }
             }

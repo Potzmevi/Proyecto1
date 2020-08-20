@@ -5,6 +5,7 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
 import BaseDeDatos.Conexion;
 import javax.swing.JOptionPane;
 
@@ -249,8 +250,7 @@ public class CrearProducto extends javax.swing.JFrame {
                 garantia = Integer.parseInt(garantiatxt.getText());
             }
             String query = ("INSERT INTO PRODUCTO VALUES('" + codigo + "','" + nombre + "','" + fabricante + "','" + cantidad + "','" + precio + "','" + descripcion + "','" + garantia + "','" + MenuEmpresa.codigoTiendaOrigen + "')");
-            Conexion conexion = new Conexion();
-            conexion.Insert(query);
+            Main.conexion.Insert(query);
             codigotxt.setText("");
             nombretxt.setText("");
             fabricantetxt.setText("");

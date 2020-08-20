@@ -5,11 +5,20 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
+import BaseDeDatos.Conexion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -28,7 +37,7 @@ public class CargarArchivo extends javax.swing.JFrame {
         this.pack();
     }
     public static File h;
-    public static String[] atributos = new String[100];
+    public static String[] atributos = new String[25];
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,44 +122,74 @@ public class CargarArchivo extends javax.swing.JFrame {
 
     public static void muestraContenido(File archivo) throws FileNotFoundException, IOException {
         String frase = "";
-        String linea="";
+        String linea = "";
         int contador = 0;
         FileReader f = new FileReader(archivo);
 
-            BufferedReader b = new BufferedReader(f);
-            while ((linea = b.readLine()) != null) {
-                JOptionPane.showMessageDialog(null, linea);
-                char[] arraychar = linea.toCharArray();
-                for (int i = 0; i < arraychar.length; i++) {
-                    if (arraychar[i] == 44) {
-                        atributos[contador] = frase;
-                        frase = "";
-                        contador++;
-                    }else{
-                        frase = frase + String.valueOf(arraychar[i]);
-                    }
-                }
-                atributos[contador] = frase;
-                frase="";
-                contador++;
+        BufferedReader b = new BufferedReader(f);
+        while ((linea = b.readLine()) != null) {
+            for (int i = 0; i < atributos.length; i++) {
+                atributos[i] = "";
             }
+            char[] arraychar = linea.toCharArray();
+            for (int i = 0; i < arraychar.length; i++) {
+                if (arraychar[i] == 44) {
+                    atributos[contador] = frase;
+                    frase = "";
+                    contador++;
+                } else {
+                    frase = frase + String.valueOf(arraychar[i]);
+                }
+            }
+            atributos[contador] = frase;
+            frase = "";
 
-        
+            contador = 0;
+            InsertarDatos();
+        }
+
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             muestraContenido(h);
+
         } catch (Exception e) {
         }
-
+        InsertarDatos();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    public static void InsertarDatos() {
+        if (atributos[0].equals("TIENDA")) {
+            String query = ("INSERT INTO TIENDA VALUES('" + atributos[3] + "','" + atributos[1] + "','" + atributos[2] + "','" + atributos[4] + "','" + atributos[5] + "','" + atributos[6] + "','" + atributos[7] + "')");
+            Main.conexion.Insert(query);
+        } else if (atributos[0].equals("TIEMPO")) {
+            String query = ("INSERT INTO TIEMPO_TIENDA VALUES('" + 0 + "','" + Integer.parseInt(atributos[3]) + "','" + atributos[2] + "','" + atributos[1] + "')");
+            Main.conexion.Insert(query);
+        } else if (atributos[0].equals("PRODUCTO")) {
+            if (atributos[8] == "") {
+                atributos[8] = "0";
+            }
+            String query = ("INSERT INTO PRODUCTO VALUES('" + atributos[3] + "','" + atributos[1] + "','" + atributos[2] + "','" + Integer.parseInt(atributos[4]) + "','" + Double.parseDouble(atributos[5]) + "','" + atributos[7] + "','" + Integer.parseInt(atributos[8]) + "','" + atributos[6] + "')");
+            Main.conexion.Insert(query);
+        } else if (atributos[0].equals("EMPLEADO")) {
+            String query = ("INSERT INTO EMPLEADO VALUES('" + atributos[2] + "','" + atributos[1] + "','" + atributos[3] + "','" + atributos[5] + "','" + atributos[4] + "','" + atributos[6] + "','" + atributos[7] + "')");
+            Main.conexion.Insert(query);
+        } else if (atributos[0].equals("CLIENTE")) {
+            String query = ("INSERT INTO CLIENTE VALUES('" + atributos[2] + "','" + atributos[1] + "','" + atributos[5] + "','" + atributos[3] + "','" + Double.parseDouble(atributos[4]) + "','" + atributos[6] + "','" + atributos[7] + "')");
+            Main.conexion.Insert(query);
+        } else if (atributos[0].equals("PEDIDO")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String date = atributos[4];
+            LocalDate fecha = LocalDate.parse(date, formatter);
+            String query = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + Integer.parseInt(atributos[7]) + "','" + Double.parseDouble(atributos[8]) + "','" +Double.parseDouble(atributos[9])    + "','" + atributos[6] + "','" + atributos[5] + "','" + atributos[2] + "','" + atributos[3]  + "')");
+            Main.conexion.Insert(query);
+        }
+    }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        for (int i = 0; i < atributos.length; i++) {
+        /*for (int i = 0; i < atributos.length; i++) {
             if (atributos[i] != null) {
                 JOptionPane.showMessageDialog(null, atributos[i]);
             }
-        }
+        }*/
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
