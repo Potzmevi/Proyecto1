@@ -22,8 +22,8 @@ public class Main {
     public static Conexion conexion = new Conexion();
         
     public static void main(String[] args) {
-        MenuEmpresa menu = new MenuEmpresa();
-        menu.setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
         conexion.conexionDB();
     }
 }

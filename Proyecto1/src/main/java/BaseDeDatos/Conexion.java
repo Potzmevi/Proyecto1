@@ -5,6 +5,7 @@
  */
 package BaseDeDatos;
 
+import FrontEnd.CargarArchivo;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -62,7 +63,7 @@ public class Conexion {
             disconnectDB();
         } catch (SQLException e) {
             if (e.getErrorCode() == MYSQL_ERROR) {
-                JOptionPane.showMessageDialog(null, "Error, el codigo de tienda ya existe.");
+                JOptionPane.showMessageDialog(null, "Error en la linea "+CargarArchivo.contadorlinea+" del archivo de texto");
             } else {
                 JOptionPane.showMessageDialog(null, "Error " + e);
             }

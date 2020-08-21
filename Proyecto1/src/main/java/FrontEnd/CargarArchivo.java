@@ -6,27 +6,23 @@
 package FrontEnd;
 
 import BackEnd.Main;
-import BaseDeDatos.Conexion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author potz
  */
 public class CargarArchivo extends javax.swing.JFrame {
+
+    public static int contadorlinea = 1;
 
     /**
      * Creates new form CargarArchivo
@@ -53,10 +49,14 @@ public class CargarArchivo extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,14 +81,6 @@ public class CargarArchivo extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
-
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoCargarArchiv.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 370));
@@ -127,6 +119,7 @@ public class CargarArchivo extends javax.swing.JFrame {
         FileReader f = new FileReader(archivo);
 
         BufferedReader b = new BufferedReader(f);
+        contadorlinea=1;
         while ((linea = b.readLine()) != null) {
             for (int i = 0; i < atributos.length; i++) {
                 atributos[i] = "";
@@ -146,6 +139,7 @@ public class CargarArchivo extends javax.swing.JFrame {
 
             contador = 0;
             InsertarDatos();
+            contadorlinea++;
         }
 
     }
@@ -159,6 +153,7 @@ public class CargarArchivo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
     public static void InsertarDatos() {
         if (atributos[0].equals("TIENDA")) {
+
             String query = ("INSERT INTO TIENDA VALUES('" + atributos[3] + "','" + atributos[1] + "','" + atributos[2] + "','" + atributos[4] + "','" + atributos[5] + "','" + atributos[6] + "','" + atributos[7] + "')");
             Main.conexion.Insert(query);
         } else if (atributos[0].equals("TIEMPO")) {
@@ -180,17 +175,32 @@ public class CargarArchivo extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String date = atributos[4];
             LocalDate fecha = LocalDate.parse(date, formatter);
-            String query = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + Integer.parseInt(atributos[7]) + "','" + Double.parseDouble(atributos[8]) + "','" +Double.parseDouble(atributos[9])    + "','" + atributos[6] + "','" + atributos[5] + "','" + atributos[2] + "','" + atributos[3]  + "')");
+            String query = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + Integer.parseInt(atributos[7]) + "','" + Double.parseDouble(atributos[8]) + "','" + Double.parseDouble(atributos[9]) + "','" + atributos[6] + "','" + atributos[5] + "','" + atributos[2] + "','" + atributos[3] + "')");
             Main.conexion.Insert(query);
         }
     }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        /*for (int i = 0; i < atributos.length; i++) {
-            if (atributos[i] != null) {
-                JOptionPane.showMessageDialog(null, atributos[i]);
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        String[] Nombres = {"TIENDA", "CLIENTE", "TIEMPO_TIENDA", "FACTURA", "EMPLEADO", "PRODUCTO", "VENTA", "PEDIDO", "RECIBO"};
+        String Query = "";
+        for (int i = 0; i < Nombres.length; i++) {
+            Query = "SELECT * FROM " + Nombres[i];
+            ResultSet Result = Main.conexion.ComboBox(Query);
+            try {
+                if (Result != null && Result.next()) {
+                    jButton2.setEnabled(false);
+                    jButton1.setEnabled(false);
+                    break;
+                } else {
+                    jButton2.setEnabled(true);
+                    jButton1.setEnabled(true);
+                }
+
+            } catch (Exception e) {
             }
-        }*/
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }
+
+
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -230,7 +240,6 @@ public class CargarArchivo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

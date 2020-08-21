@@ -120,9 +120,8 @@ public class CrearTiempo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        String Query = "SELECT CODIGO FROM TIENDA";
-        Conexion conexion= new Conexion();
-        ResultSet Result = conexion.ComboBox(Query);
+        String Query = "SELECT codigo FROM TIENDA";
+        ResultSet Result = Main.conexion.ComboBox(Query);
          try {
              while (Result.next()) {
                  if(String.valueOf(Result.getObject("codigo")).equals(MenuEmpresa.codigoTiendaOrigen)){
