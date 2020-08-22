@@ -5,6 +5,7 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
 import BaseDeDatos.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -357,7 +358,7 @@ public class CrearVenta extends javax.swing.JFrame {
     private void enviarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarbuttonActionPerformed
         int filacliente = clientetable.getSelectedRow();
         int filaselected = productotable.getSelectedRow();
-        int cantidadint = Integer.parseInt(cantidadtxt.getText());
+
         if (filacliente >= 0) {
             NITCLIENTE = clientetable.getValueAt(filacliente, 0).toString();
         }
@@ -366,9 +367,8 @@ public class CrearVenta extends javax.swing.JFrame {
         } else {
             if (filaselected >= 0 && cantidadtxt.getText().length() != 0) {
                 String cant = productotable.getValueAt(filaselected, 3).toString();
+                int cantidadint = Integer.parseInt(cantidadtxt.getText());
                 if (Integer.parseInt(cant) >= cantidadint && Integer.parseInt(cant) > 0) {
-                    JOptionPane.showMessageDialog(null, filaselected);
-
                     String[] datos = new String[4];
                     datos[0] = productotable.getValueAt(filaselected, 0).toString();
                     datos[1] = productotable.getValueAt(filaselected, 1).toString();
@@ -381,8 +381,7 @@ public class CrearVenta extends javax.swing.JFrame {
                     int newcantidad = Integer.parseInt(cant) - cantidadint;
                     String codigoproducto = productotable.getValueAt(filaselected, 0).toString();
                     String query = ("UPDATE PRODUCTO SET cantidad = '" + newcantidad + "' WHERE codigo='" + codigoproducto + "'");
-                    Conexion conexion = new Conexion();
-                    conexion.Insert(query);
+                    Main.conexion.Insert(query);
                     llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
                     jRadioButton1.setEnabled(true);
                     jRadioButton2.setEnabled(true);
@@ -410,8 +409,7 @@ public class CrearVenta extends javax.swing.JFrame {
         String codigo_tienda = MenuEmpresa.codigoTiendaOrigen;
 
         String query = ("INSERT INTO FACTURA VALUES('" + 0 + "','" + total + "','" + fecha + "','" + codigo_tienda + "','" + NITCLIENTE + "')");
-        Conexion conexion = new Conexion();
-        int codigo_factura = conexion.InsertVenta(query);
+        int codigo_factura = Main.conexion.InsertVenta(query);
 
         for (int i = 0; i < carritotable.getRowCount(); i++) {
             int cantidad = Integer.parseInt(carritotable.getValueAt(i, 3).toString());
@@ -428,24 +426,24 @@ public class CrearVenta extends javax.swing.JFrame {
         if (jRadioButton2.isSelected() == true) {
             if (getcredito >= totaldellabel) {
                 query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
-                conexion.Insert(query);
+                Main.conexion.Insert(query);
                 totallabel.setText("0");
             } else if (getcredito < totaldellabel) {
                 cantidadfinal = 0.0;
                 query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
-                conexion.Insert(query);
+                Main.conexion.Insert(query);
                 totallabel.setText(String.valueOf(totaldellabel - getcredito));
             }
             llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
         }
-        
+
         model = new DefaultTableModel();
-         carritotable.setModel(model);
+        carritotable.setModel(model);
         model.addColumn("Codigo");
         model.addColumn("Nombre");
         model.addColumn("Precio");
         model.addColumn("Cantidad");
-        
+
     }//GEN-LAST:event_ComprarbuttonActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -474,9 +472,8 @@ public class CrearVenta extends javax.swing.JFrame {
         String campo = filtro.getText();
         String where = "";
 
-        if (!"".equals(campo)) {
-            where = "WHERE " + value + " LIKE '%" + campo + "%' " + tienda;
-        }
+        where = "WHERE " + value + " LIKE '%" + campo + "%' ";
+
         try {
             DefaultTableModel model = new DefaultTableModel() {
                 @Override
@@ -486,7 +483,7 @@ public class CrearVenta extends javax.swing.JFrame {
             };
 
             tabla.setModel(model);
-            String query = accion + where;
+            String query = accion + where + tienda;
             Conexion conexion = new Conexion();
             ResultSet Result = conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
@@ -518,33 +515,33 @@ public class CrearVenta extends javax.swing.JFrame {
         nittxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
-                llenarTabla(nittxt, "SELECT NIT, nombre FROM CLIENTE ", true, clientetable, "NIT", "");
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
             }
 
             @Override
             public void removeUpdate(DocumentEvent de) {
-                llenarTabla(nittxt, "SELECT NIT, nombre FROM CLIENTE ", true, clientetable, "NIT", "");
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
             }
 
             @Override
             public void changedUpdate(DocumentEvent de) {
-                llenarTabla(nittxt, "SELECT NIT, nombre FROM CLIENTE ", true, clientetable, "NIT", "");
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
             }
         });
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
-                llenarTabla(codigotxt, "SELECT codigo, nombre, precio FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
             }
 
             @Override
             public void removeUpdate(DocumentEvent de) {
-                llenarTabla(codigotxt, "SELECT codigo, nombre, precio FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
             }
 
             @Override
             public void changedUpdate(DocumentEvent de) {
-                llenarTabla(codigotxt, "SELECT codigo, nombre, precio FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
             }
         });
     }

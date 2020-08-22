@@ -5,11 +5,36 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
+import BaseDeDatos.Conexion;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author potz
  */
 public class CrearPedido extends javax.swing.JFrame {
+
+    public static String NITCLIENTE = "";
+    public static Double anticipoprueba = 0.0;
+    public static DefaultTableModel model = new DefaultTableModel() {
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    public LocalDate fecha = LocalDate.now();
 
     /**
      * Creates new form CrearPedido
@@ -28,159 +53,208 @@ public class CrearPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        anticipotxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        codigotxt = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        totaltxt = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        clientetable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        productotable = new javax.swing.JTable();
+        cantidadtxt = new javax.swing.JTextField();
+        nittxt = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        tiendacombo = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pedido");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField5.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField5.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField5.setBorder(null);
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        anticipotxt.setBackground(new java.awt.Color(153, 153, 153));
+        anticipotxt.setForeground(new java.awt.Color(102, 102, 102));
+        anticipotxt.setBorder(null);
+        anticipotxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                anticipotxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 250, 30));
+        jPanel1.add(anticipotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 180, 30));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Codigo.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 30, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 30, 30));
 
         jLabel10.setBackground(new java.awt.Color(153, 153, 153));
         jLabel10.setOpaque(true);
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 30, 30));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 30, 30));
 
         jLabel4.setBackground(new java.awt.Color(153, 153, 153));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Cantidad.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, 30));
 
         jLabel2.setBackground(new java.awt.Color(153, 153, 153));
         jLabel2.setOpaque(true);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 30, 30));
-
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 280, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 30, 30));
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Anticipo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventas.png"))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 30, 30));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 30, 30));
 
         jLabel14.setBackground(new java.awt.Color(153, 153, 153));
         jLabel14.setOpaque(true);
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 30, 30));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 30, 30));
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Cantidad:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/DNI.png"))); // NOI18N
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 30, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, 30));
 
-        jTextField6.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField6.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField6.setBorder(null);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 250, 30));
+        codigotxt.setBackground(new java.awt.Color(153, 153, 153));
+        codigotxt.setForeground(new java.awt.Color(102, 102, 102));
+        codigotxt.setBorder(null);
+        jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 180, 30));
 
         jLabel16.setBackground(new java.awt.Color(153, 153, 153));
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setOpaque(true);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 30, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 30, 30));
 
-        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("Tienda:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+        totaltxt.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        totaltxt.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.add(totaltxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 140, 20));
+
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reloj.png"))); // NOI18N
+        jButton2.setText("Confirmar un pedido");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 190, 30));
+
+        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setText("Pedido:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Producto:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, -1));
+
+        clientetable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(clientetable);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 330, 90));
+
+        productotable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(productotable);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 340, 90));
+
+        cantidadtxt.setBackground(new java.awt.Color(153, 153, 153));
+        cantidadtxt.setForeground(new java.awt.Color(51, 51, 51));
+        cantidadtxt.setBorder(null);
+        jPanel1.add(cantidadtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 180, 30));
+
+        nittxt.setBackground(new java.awt.Color(153, 153, 153));
+        nittxt.setForeground(new java.awt.Color(51, 51, 51));
+        nittxt.setBorder(null);
+        jPanel1.add(nittxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 180, 30));
+
+        jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setText("Cliente:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
+
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 380, 240));
+
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 370, 240));
+
+        jPanel1.add(tiendacombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 210, -1));
+
+        jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setText("Tienda:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel19.setText("Total:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventas.png"))); // NOI18N
         jButton1.setText("Crear Pedido:");
         jButton1.setBorder(null);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 150, 50));
-
-        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Pedido:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Cliente:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 280, 90));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable2);
-
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 280, 90));
-
-        jTextField1.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField1.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 180, 30));
-
-        jTextField2.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField2.setForeground(new java.awt.Color(51, 51, 51));
-        jTextField2.setBorder(null);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 180, 30));
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 150, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoPedido.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 370));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,9 +270,222 @@ public class CrearPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void anticipotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anticipotxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_anticipotxtActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+
+        llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
+        Keilstener();
+
+        String Query = "SELECT codigo FROM TIENDA";
+        ResultSet Result = Main.conexion.ComboBox(Query);
+        try {
+            while (Result.next()) {
+                if (String.valueOf(Result.getObject("codigo")).equals(MenuEmpresa.codigoTiendaOrigen)) {
+
+                } else {
+                    tiendacombo.addItem(String.valueOf(Result.getObject("codigo")));
+                }
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        RecibirPedido recibir= new RecibirPedido();
+        recibir.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int filacliente = clientetable.getSelectedRow();
+        int filaselected = productotable.getSelectedRow();
+
+        if (filacliente >= 0) {
+            NITCLIENTE = clientetable.getValueAt(filacliente, 0).toString();
+        }
+        if (NITCLIENTE == "") {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un cliente");
+        } else {
+            if (anticipotxt.getText().length() != 0) {
+                if (Double.parseDouble(anticipotxt.getText()) >= anticipoprueba) {
+                    if (filaselected >= 0 && cantidadtxt.getText().length() != 0) {
+                        int cantidadint = Integer.parseInt(cantidadtxt.getText());
+                        String cant = productotable.getValueAt(filaselected, 3).toString();
+                        if (Integer.parseInt(cant) >= cantidadint && Integer.parseInt(cant) > 0) {
+
+                            String[] datos = new String[4];
+                            datos[0] = productotable.getValueAt(filaselected, 0).toString();
+                            datos[1] = productotable.getValueAt(filaselected, 1).toString();
+                            datos[2] = productotable.getValueAt(filaselected, 2).toString();
+                            datos[3] = cantidadtxt.getText();
+
+                            Double getcredito = Double.parseDouble(clientetable.getValueAt(filacliente, 2).toString());
+                            Double totalfinal =Double.parseDouble( totaltxt.getText());
+                            LocalDate fecha = LocalDate.now();
+                            String tiendadestino = tiendacombo.getSelectedItem().toString();
+                            int newcantidad = Integer.parseInt(cant) - cantidadint;
+                            String query = ("UPDATE PRODUCTO SET cantidad = '" + newcantidad + "' WHERE codigo='" + datos[0] + "'");
+                            Main.conexion.Insert(query);
+                            llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
+
+                            Double anticipo = Double.parseDouble(anticipotxt.getText());
+                            if (anticipo > getcredito) {
+                                JOptionPane.showMessageDialog(null, "No posee esa cantidad de credito");
+                            } else if (anticipo <= getcredito) {
+                                if (anticipo >= totalfinal) {
+                                    JOptionPane.showMessageDialog(null, totalfinal + " " + anticipo);
+                                    anticipo = anticipo - totalfinal;
+                                    totalfinal = 0.0;
+                                    totaltxt.setText(totalfinal.toString());
+                                    query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + NITCLIENTE + "'");
+                                    Main.conexion.Insert(query);
+                                    String query2 = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + cantidadint + "','" + totalfinal + "','" + anticipo + "','" + datos[0] + "','" + NITCLIENTE + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + tiendadestino + "')");
+                                    Main.conexion.Insert(query2);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, totalfinal + " " + anticipo);
+                                    totalfinal = totalfinal - anticipo;
+                                    totaltxt.setText(totalfinal.toString());
+                                    anticipo=getcredito-anticipo;
+                                    query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + NITCLIENTE + "'");
+                                    Main.conexion.Insert(query);
+                                    String query2 = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + cantidadint + "','" + totalfinal + "','" + anticipo + "','" + datos[0] + "','" + NITCLIENTE + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + tiendadestino + "')");
+                                    Main.conexion.Insert(query2);
+                                }
+                                totaltxt.setText("");
+                                anticipotxt.setText("");
+                                cantidadtxt.setText("");
+                                codigotxt.setText("");
+                                nittxt.setText("");
+                            }
+                            llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+
+                        } else if ((Integer.parseInt(cant) <= cantidadint) && Integer.parseInt(cant) == 0) {
+                            JOptionPane.showMessageDialog(null, "Producto agotado");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No hay la cantidad del producto solicitado en esta tienda");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Por favor seleccione un producto e ingrese una cantidad");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese un anticipo mayor al 25%");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un anticipo mayor al 25%");
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
+        String campo = filtro.getText();
+        String where = "";
+
+        where = "WHERE " + value + " LIKE '%" + campo + "%' ";
+        try {
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+
+            tabla.setModel(model);
+            String query = accion + where + tienda;
+            ResultSet Result = Main.conexion.ComboBox(query);
+            ResultSetMetaData rsMd = Result.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+            if (cliente == true) {
+                model.addColumn("NIT");
+                model.addColumn("Nombre");
+                model.addColumn("Credito");
+            } else {
+                model.addColumn("Codigo");
+                model.addColumn("Nombre");
+                model.addColumn("Precio");
+                model.addColumn("Cantidad");
+            }
+            while (Result.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = Result.getObject(i + 1);
+
+                }
+                model.addRow(filas);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void Keilstener() {
+        nittxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+            }
+        });
+        codigotxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
+            }
+        });
+        cantidadtxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                sumartotal();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                sumartotal();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                sumartotal();
+            }
+        });
+    }
+
+    public void sumartotal() {
+        double p = 0;
+        try {
+            int row = productotable.getSelectedRow();
+            p = Double.parseDouble(productotable.getValueAt(row, 2).toString());
+            p *= Double.parseDouble(cantidadtxt.getText());
+            totaltxt.setText(String.valueOf(p));
+            anticipoprueba = p * (0.25);
+
+        } catch (Exception e) {
+            totaltxt.setText("0.00");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -236,30 +523,36 @@ public class CrearPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField anticipotxt;
+    private javax.swing.JTextField cantidadtxt;
+    private javax.swing.JTable clientetable;
+    private javax.swing.JTextField codigotxt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nittxt;
+    private javax.swing.JTable productotable;
+    private javax.swing.JComboBox<String> tiendacombo;
+    private javax.swing.JLabel totaltxt;
     // End of variables declaration//GEN-END:variables
 }

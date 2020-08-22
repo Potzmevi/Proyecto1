@@ -41,6 +41,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         combotienda = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +115,14 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jLabel5.setText("Tienda Actual:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 110, 30));
 
+        jButton8.setText("Pedidos");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 120, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoNuevaTienda.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -178,6 +187,12 @@ public class MenuEmpresa extends javax.swing.JFrame {
         codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+      CrearPedido pedido = new CrearPedido();
+      pedido.setVisible(true);
+      codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,6 +236,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
