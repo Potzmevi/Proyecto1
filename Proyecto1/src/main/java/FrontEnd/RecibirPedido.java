@@ -155,7 +155,6 @@ public class RecibirPedido extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error " + e);
             }
-            JOptionPane.showMessageDialog(null, MenuEmpresa.codigoTiendaOrigen);
             LocalDate fecha = LocalDate.now();
             String query2 = ("INSERT INTO RECIBO VALUES('" + 0 + "','" + fecha + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + datos[0] + "','" + ID + "')");
             Main.conexion.Insert(query2);

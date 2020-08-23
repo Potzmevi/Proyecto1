@@ -268,7 +268,7 @@ public class CrearPedido extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 140, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoPedido.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoVenta.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,21 +345,19 @@ public class CrearPedido extends javax.swing.JFrame {
                             int newcantidad = Integer.parseInt(cant) - cantidadint;
                             String query = ("UPDATE PRODUCTO SET cantidad = '" + newcantidad + "' WHERE codigo='" + datos[0] + "'");
                             Main.conexion.Insert(query);
-                            llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
+                            llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
 
                             Double anticipo = Double.parseDouble(anticipotxt.getText());
                             if (anticipo > getcredito) {
                                 JOptionPane.showMessageDialog(null, "No posee esa cantidad de credito");
                             } else if (anticipo <= getcredito) {
                                 if (anticipo >= totalfinal) {
-                                    JOptionPane.showMessageDialog(null, totalfinal + " " + anticipo);
                                     anticipo = getcredito - totalfinal;
                                     query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + NITCLIENTE + "'");
                                     Main.conexion.Insert(query);
                                     String query2 = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + cantidadint + "','" + totalfinal + "','" + anticipo + "','" + datos[0] + "','" + NITCLIENTE + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + tiendadestino + "')");
                                     Main.conexion.Insert(query2);
                                 } else {
-                                    JOptionPane.showMessageDialog(null, totalfinal + " " + anticipo);
                                     totaltxt.setText(totalfinal.toString());
                                     anticipo=getcredito-anticipo;
                                     query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + NITCLIENTE + "'");

@@ -6,6 +6,7 @@
 package FrontEnd;
 
 import BaseDeDatos.Conexion;
+import Reportes.Reporte1;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -47,6 +48,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +69,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 130, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 130, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Usuarios.png"))); // NOI18N
         jButton2.setText("Usuarios");
@@ -76,7 +78,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reloj.png"))); // NOI18N
         jButton3.setText("Tiempo");
@@ -94,7 +96,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconotiende.png"))); // NOI18N
         jButton5.setText("Tiendas");
@@ -126,7 +128,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 90, 40));
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 90, 40));
 
         jButton9.setText("Visualizar/Modificar");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +136,15 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 180, 30));
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 180, 40));
+
+        jButton7.setText("Reporte");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoNuevaTienda.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -212,6 +222,12 @@ public class MenuEmpresa extends javax.swing.JFrame {
         codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Reporte1 reporte = new Reporte1();
+        reporte.setVisible(true);
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +271,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
