@@ -17,15 +17,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author potz
  */
-public class Reporte5 extends javax.swing.JFrame {
+public class Reporte7 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Reporte5
+     * Creates new form Reporte7
      */
-    public Reporte5() {
+    public Reporte7() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.pack();
     }
 
     /**
@@ -41,9 +39,11 @@ public class Reporte5 extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pedidotable = new javax.swing.JTable();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Producots mas vendidos");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -54,8 +54,8 @@ public class Reporte5 extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Compras Cliente:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+        jLabel11.setText("10 Productos mas vendidos");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         pedidotable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,10 +70,15 @@ public class Reporte5 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(pedidotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 70, 580, 260));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 580, 310));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reporte5.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 340));
+        jFormattedTextField1.setBackground(new java.awt.Color(153, 153, 153));
+        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 210, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VisualizarCliente.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 440));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,11 +98,11 @@ public class Reporte5 extends javax.swing.JFrame {
        llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
-    public void llenarTabla( String accion, boolean cliente, JTable tabla, String value, String tienda) {
+    public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";
 
-        where = "WHERE  codigo_tienda2='"+MenuEmpresa.codigoTiendaOrigen+"'";
+        where = "WHERE  codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
         try {
             DefaultTableModel model = new DefaultTableModel() {
                 @Override
@@ -106,17 +111,18 @@ public class Reporte5 extends javax.swing.JFrame {
                 }
             };
             tabla.setModel(model);
-            String query = "SELECT C.NIT, C.nombre, F.*  FROM CLIENTE C INNER JOIN FACTURA F ON C.NIT = F.nit_cliente ORDER BY C.NIT ASC";
+            String query = "SELECT P.*,F.fecha,COUNT(*) AS VENTAS FROM PRODUCTO P INNER JOIN VENTA V ON P.codigo=V.codigo_producto INNER JOIN FACTURA F ON V.codigo_factura=F.codigo GROUP BY P.codigo ORDER BY COUNT(*) DESC LIMIT 10;";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
             model.addColumn("NIT");
             model.addColumn("Nombre");
             model.addColumn("Codigo");
-            model.addColumn("Total");
             model.addColumn("Fecha");
-            model.addColumn("Codigo Tienda");
-            model.addColumn("NIT Factura");
+            model.addColumn("Cantidad");
+            model.addColumn("Total");
+            model.addColumn("Anticipo");
+            model.addColumn("Codigo Producto");
             while (Result.next()) {
                 Object[] filas = new Object[cantidadColumnas];
                 for (int i = 0; i < cantidadColumnas; i++) {
@@ -146,25 +152,26 @@ public class Reporte5 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reporte5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reporte5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reporte5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reporte5.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reporte5().setVisible(true);
+                new Reporte7().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
