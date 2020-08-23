@@ -6,7 +6,6 @@
 package Reportes;
 
 import BackEnd.Main;
-import BaseDeDatos.Conexion;
 import FrontEnd.MenuEmpresa;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,12 +20,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author potz
  */
-public class Reportes2 extends javax.swing.JFrame {
+public class Reporte4 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Reportes2
+     * Creates new form Reporte4
      */
-    public Reportes2() {
+    public Reporte4() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
@@ -43,13 +41,13 @@ public class Reportes2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pedidotable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Reporte 2");
+        setTitle("Pedidos en transito");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -58,10 +56,10 @@ public class Reportes2 extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel10.setText("Pedidos a Tiempo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Pedidos en transito:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
         pedidotable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,10 +74,10 @@ public class Reportes2 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(pedidotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 590, 280));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 80, 580, 240));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoProducto.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reporte4.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,8 +95,6 @@ public class Reportes2 extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
-
-
     }//GEN-LAST:event_formComponentShown
 
     public boolean compararRetraso(int dias, String fechape) {
@@ -116,10 +112,11 @@ public class Reportes2 extends javax.swing.JFrame {
         return retraso;
     }
 
-    public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
+    public void llenarTabla( String accion, boolean cliente, JTable tabla, String value, String tienda) {
+        String campo = "";
         String where = "";
 
-        where = "WHERE  codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
+        where = "WHERE  codigo_tienda2='"+MenuEmpresa.codigoTiendaOrigen+"'";
         try {
             DefaultTableModel model = new DefaultTableModel() {
                 @Override
@@ -128,7 +125,7 @@ public class Reportes2 extends javax.swing.JFrame {
                 }
             };
             tabla.setModel(model);
-            String query = "SELECT P.*,T.tiempo FROM PEDIDO P INNER JOIN TIEMPO_TIENDA T ON (P.codigo_tienda=T.codigo_tienda || P.codigo_tienda = T.codigo_tienda2)&&(P.codigo_tienda2=T.codigo_tienda || P.codigo_tienda2 = T.codigo_tienda2) LEFT JOIN RECIBO R ON P.codigo=R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
+            String query = "SELECT P.* FROM PEDIDO P LEFT JOIN RECIBO R ON P.codigo = R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda='"+MenuEmpresa.codigoTiendaOrigen+"'";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
@@ -141,32 +138,21 @@ public class Reportes2 extends javax.swing.JFrame {
             model.addColumn("Cliente");
             model.addColumn("Tienda 1");
             model.addColumn("Tienda 2");
-            model.addColumn("Tiempo");
-            int[] diastabla = new int[100];
-            String[] fecha = new String[100];
-            int contador = 0;
             while (Result.next()) {
-                diastabla[contador] = Integer.parseInt(Result.getObject("tiempo").toString());
-                fecha[contador] = Result.getObject("fecha").toString();
-
                 Object[] filas = new Object[cantidadColumnas];
-                if (compararRetraso(diastabla[contador], fecha[contador]) == false) {
-
-                    for (int i = 0; i < cantidadColumnas; i++) {
-
-                        filas[i] = Result.getObject(i + 1);
-
-                    }
-                    model.addRow(filas);
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = Result.getObject(i + 1);
                 }
-
-                contador++;
+                model.addRow(filas);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
     }
 
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -184,27 +170,27 @@ public class Reportes2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reportes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reportes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reportes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reportes2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reporte4.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Reportes2().setVisible(true);
+                new Reporte4().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pedidotable;

@@ -7,6 +7,9 @@ package FrontEnd;
 
 import BaseDeDatos.Conexion;
 import Reportes.Reporte1;
+import Reportes.Reporte3;
+import Reportes.Reporte4;
+import Reportes.Reportes2;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -223,7 +226,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Reporte1 reporte = new Reporte1();
+        Reporte4 reporte = new Reporte4();
         reporte.setVisible(true);
         codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton7ActionPerformed
