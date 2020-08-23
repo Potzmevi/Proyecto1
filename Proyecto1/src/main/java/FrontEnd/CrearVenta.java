@@ -42,6 +42,8 @@ public class CrearVenta extends javax.swing.JFrame {
      */
     public CrearVenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -416,8 +418,7 @@ public class CrearVenta extends javax.swing.JFrame {
             Double precio = Double.parseDouble(carritotable.getValueAt(i, 2).toString());
             String codigo_producto = carritotable.getValueAt(i, 0).toString();
             String query2 = ("INSERT INTO VENTA VALUES('" + 0 + "','" + cantidad + "','" + precio + "','" + codigo_producto + "','" + codigo_factura + "')");
-            Conexion conexion2 = new Conexion();
-            conexion2.Insert(query2);
+            Main.conexion.Insert(query2);
         }
 
         Double getcredito = Double.parseDouble(clientetable.getValueAt(filacliente, 2).toString());

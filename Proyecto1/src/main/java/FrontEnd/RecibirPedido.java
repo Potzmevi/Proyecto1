@@ -29,7 +29,9 @@ public class RecibirPedido extends javax.swing.JFrame {
      * Creates new form RecibirPedido
      */
     public RecibirPedido() {
-        initComponents();
+      initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**

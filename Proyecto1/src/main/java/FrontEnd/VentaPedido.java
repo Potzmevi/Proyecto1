@@ -5,6 +5,21 @@
  */
 package FrontEnd;
 
+import BackEnd.Main;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import static java.time.temporal.ChronoUnit.DAYS;
+
 /**
  *
  * @author potz
@@ -16,6 +31,8 @@ public class VentaPedido extends javax.swing.JFrame {
      */
     public VentaPedido() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -35,6 +52,9 @@ public class VentaPedido extends javax.swing.JFrame {
         idtxt = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -60,42 +80,69 @@ public class VentaPedido extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(recibotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 400, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 400, 200));
 
         jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Seleccionar Recibo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 150, -1));
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Vender Pedido");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 160, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 160, -1));
 
         idtxt.setBackground(new java.awt.Color(153, 153, 153));
         idtxt.setForeground(new java.awt.Color(51, 51, 51));
         idtxt.setBorder(null);
-        jPanel1.add(idtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 180, 30));
+        jPanel1.add(idtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 180, 30));
 
         jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Codigo.png"))); // NOI18N
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, 30));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, 30));
 
         jLabel16.setBackground(new java.awt.Color(153, 153, 153));
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setOpaque(true);
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 30, 30));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 30, 30));
+
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrito.png"))); // NOI18N
+        jButton1.setText("Confirmar Recibo");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 180, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 400, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoVentaPedido.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,8 +153,131 @@ public class VentaPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        llenarTabla(idtxt, "SELECT ID, codigo_tienda, codigo_pedido FROM CLIENTE ", true, clientetable, "NIT", "");
+        llenarTabla(idtxt, "SELECT ID, fecha, codigo_tienda, codigo_pedido, codigo_tiempo FROM RECIBO ", true, recibotable, "ID", "");
+        Keylstener();
     }//GEN-LAST:event_formComponentShown
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int filaselected = recibotable.getSelectedRow();
+        String[] datosrecibo = new String[5];
+        if (filaselected >= 0) {
+            datosrecibo[4] = recibotable.getValueAt(filaselected, 4).toString();
+            datosrecibo[3] = recibotable.getValueAt(filaselected, 3).toString();
+            datosrecibo[1] = recibotable.getValueAt(filaselected, 1).toString();
+            try {
+
+                String query = "SELECT fecha, cantidad, total, anticipo, codigo_producto, nit_cliente  FROM PEDIDO WHERE codigo='" + datosrecibo[3] + "'";
+                ResultSet Result = Main.conexion.ComboBox(query);
+                ResultSetMetaData rsMd = Result.getMetaData();
+                int cantidadColumnas = rsMd.getColumnCount();
+                while (Result.next()) {
+                    String[] datos = new String[cantidadColumnas];
+                    for (int i = 0; i < cantidadColumnas; i++) {
+                        datos[i] = String.valueOf(Result.getObject(i + 1));
+                    }
+
+                    LocalDate fecha = LocalDate.now();
+                    query = ("INSERT INTO FACTURA VALUES('" + 0 + "','" + Integer.parseInt(datos[1]) + "','" + fecha + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + datos[5] + "')");
+                    int codigo_factura = Main.conexion.InsertVenta(query);
+                    query = ("INSERT INTO VENTA VALUES('" + 0 + "','" + Integer.parseInt(datos[1]) + "','" + Double.parseDouble(datos[2]) + "','" + datos[4] + "','" + codigo_factura + "')");
+                    Main.conexion.Insert(query);
+
+                    query = "SELECT tiempo FROM TIEMPO_TIENDA WHERE ID='" + datosrecibo[4] + "'";
+                    Result = Main.conexion.ComboBox(query);
+                    while (Result.next()) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String fechapedido = datos[0];
+                        String fecharecibo = datosrecibo[1];
+                        LocalDate fecha1 = LocalDate.parse(fechapedido, formatter);
+                        LocalDate fecha2 = LocalDate.parse(fecharecibo, formatter);
+                        long diasdiferencia = DAYS.between(fecha1, fecha2);
+                        int diastiempo = Integer.parseInt(String.valueOf(Result.getObject(1)));
+                        if ((int)diasdiferencia > diastiempo) {
+                            
+                            if (Double.parseDouble(datos[3]) >= Double.parseDouble(datos[2])) {
+                                double anticipo = (Double.parseDouble(datos[2]) * 0.05) + Double.parseDouble(datos[3]);
+                                JOptionPane.showMessageDialog(null, anticipo);
+                                query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + datos[5] + "'");
+                                Main.conexion.Insert(query);
+                            }else{
+                                 
+                                double anticipo = (Double.parseDouble(datos[2]) * 0.02) + Double.parseDouble(datos[3]);
+                                JOptionPane.showMessageDialog(null, anticipo+" "+datos[2]+" "+datos[3]);
+                                query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + datos[5] + "'");
+                                Main.conexion.Insert(query);
+                            }
+
+                        } else {
+                            JOptionPane.showConfirmDialog(null, "Si llego a tiempo");
+                        }
+
+                    }
+                }
+
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un recibo por favor");
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
+        String campo = filtro.getText();
+        String where = "";
+
+        where = "WHERE " + value + " LIKE '%" + campo + "%' ";
+        try {
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+
+            tabla.setModel(model);
+            String query = accion + where + tienda;
+            ResultSet Result = Main.conexion.ComboBox(query);
+            ResultSetMetaData rsMd = Result.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+            model.addColumn("ID");
+            model.addColumn("Fecha");
+            model.addColumn("Tienda");
+            model.addColumn("Pedido");
+            model.addColumn("Codigo Tiempo");
+            while (Result.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = Result.getObject(i + 1);
+
+                }
+                model.addRow(filas);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void Keylstener() {
+        idtxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                llenarTabla(idtxt, "SELECT ID, fecha, codigo_tienda, codigo_pedido, codigo_tiempo FROM RECIBO ", true, recibotable, "ID", "");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                llenarTabla(idtxt, "SELECT ID, fecha, codigo_tienda, codigo_pedido, codigo_tiempo FROM RECIBO ", true, recibotable, "ID", "");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                llenarTabla(idtxt, "SELECT ID, fecha, codigo_tienda, codigo_pedido, codigo_tiempo FROM RECIBO ", true, recibotable, "ID", "");
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments
@@ -146,6 +316,7 @@ public class VentaPedido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idtxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
@@ -153,6 +324,8 @@ public class VentaPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable recibotable;
     // End of variables declaration//GEN-END:variables
 }

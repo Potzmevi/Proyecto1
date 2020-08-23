@@ -14,12 +14,16 @@ import javax.swing.JOptionPane;
  * @author potz
  */
 public class MenuEmpresa extends javax.swing.JFrame {
+    
     public static String codigoTiendaOrigen;
+
     /**
      * Creates new form MenuEmpresa
      */
     public MenuEmpresa() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -42,6 +46,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
         combotienda = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,13 +61,13 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoIntelaf.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 80));
 
-        jButton1.setText("Reportes");
+        jButton1.setText("Cargar Datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 120, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 130, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Usuarios.png"))); // NOI18N
         jButton2.setText("Usuarios");
@@ -71,7 +76,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reloj.png"))); // NOI18N
         jButton3.setText("Tiempo");
@@ -89,7 +94,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconotiende.png"))); // NOI18N
         jButton5.setText("Tiendas");
@@ -121,7 +126,15 @@ public class MenuEmpresa extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 120, 30));
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 90, 40));
+
+        jButton9.setText("Visualizar/Modificar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 180, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoNuevaTienda.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -151,32 +164,32 @@ public class MenuEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       CrearTiempo tiempo= new CrearTiempo();
-       tiempo.setVisible(true);
-       codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+        CrearTiempo tiempo = new CrearTiempo();
+        tiempo.setVisible(true);
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       CrearTienda tienda = new CrearTienda();
-       tienda.setVisible(true);
+        CrearTienda tienda = new CrearTienda();
+        tienda.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        CrearProducto producto =new CrearProducto();
+        CrearProducto producto = new CrearProducto();
         producto.setVisible(true);
-        codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         String Query = "SELECT CODIGO FROM TIENDA";
-        Conexion conexion= new Conexion();
+        Conexion conexion = new Conexion();
         ResultSet Result = conexion.ComboBox(Query);
-         try {
-             while (Result.next()) {
-
-            combotienda.addItem(String.valueOf(Result.getObject("codigo")));
-        }
-
+        try {
+            while (Result.next()) {
+                
+                combotienda.addItem(String.valueOf(Result.getObject("codigo")));
+            }
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_formComponentShown
@@ -184,14 +197,20 @@ public class MenuEmpresa extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         CrearVenta venta = new CrearVenta();
         venta.setVisible(true);
-        codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-      CrearPedido pedido = new CrearPedido();
-      pedido.setVisible(true);
-      codigoTiendaOrigen=String.valueOf(combotienda.getSelectedItem());
+        CrearPedido pedido = new CrearPedido();
+        pedido.setVisible(true);
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        VisualizarMENU menu = new VisualizarMENU();
+        menu.setVisible(true);
+        codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +256,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
