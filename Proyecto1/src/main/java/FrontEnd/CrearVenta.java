@@ -27,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CrearVenta extends javax.swing.JFrame {
 
+    int filacliente = 0;
+    Double getcredito = 0.0;
     public static String NITCLIENTE = "";
     public static DefaultTableModel model = new DefaultTableModel() {
 
@@ -358,11 +360,13 @@ public class CrearVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_nittxtKeyTyped
 
     private void enviarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarbuttonActionPerformed
-        int filacliente = clientetable.getSelectedRow();
+        filacliente = clientetable.getSelectedRow();
         int filaselected = productotable.getSelectedRow();
 
         if (filacliente >= 0) {
             NITCLIENTE = clientetable.getValueAt(filacliente, 0).toString();
+            filacliente = clientetable.getSelectedRow();
+            getcredito = Double.parseDouble(clientetable.getValueAt(filacliente, 2).toString());
         }
         if (NITCLIENTE == "") {
             JOptionPane.showMessageDialog(null, "Por favor seleccione un cliente");
@@ -406,8 +410,10 @@ public class CrearVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_cantidadtxtActionPerformed
 
     private void ComprarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarbuttonActionPerformed
-        int filacliente = clientetable.getSelectedRow();
-        Double total = Double.parseDouble(totallabel.getText());
+        Double total = 0.0;
+        Double totaldellabel = 0.0;
+        Double cantidadfinal = 0.0;
+        total = Double.parseDouble(totallabel.getText());
         String codigo_tienda = MenuEmpresa.codigoTiendaOrigen;
 
         String query = ("INSERT INTO FACTURA VALUES('" + 0 + "','" + total + "','" + fecha + "','" + codigo_tienda + "','" + NITCLIENTE + "')");
@@ -421,9 +427,9 @@ public class CrearVenta extends javax.swing.JFrame {
             Main.conexion.Insert(query2);
         }
 
-        Double getcredito = Double.parseDouble(clientetable.getValueAt(filacliente, 2).toString());
-        Double totaldellabel = Double.parseDouble(totallabel.getText());
-        Double cantidadfinal = getcredito - total;
+        totaldellabel = Double.parseDouble(totallabel.getText());
+        cantidadfinal = getcredito - total;
+        JOptionPane.showMessageDialog(null, getcredito + " " + filacliente);
         if (jRadioButton2.isSelected() == true) {
             if (getcredito >= totaldellabel) {
                 query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");

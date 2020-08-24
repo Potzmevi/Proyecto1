@@ -9,7 +9,7 @@ import BaseDeDatos.Conexion;
 import Reportes.Reporte1;
 import Reportes.Reporte3;
 import Reportes.Reporte4;
-import Reportes.Reportes2;
+import Reportes.Reporte2;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 

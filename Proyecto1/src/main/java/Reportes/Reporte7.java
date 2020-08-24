@@ -111,18 +111,19 @@ public class Reporte7 extends javax.swing.JFrame {
                 }
             };
             tabla.setModel(model);
-            String query = "SELECT P.*,F.fecha,COUNT(*) AS VENTAS FROM PRODUCTO P INNER JOIN VENTA V ON P.codigo=V.codigo_producto INNER JOIN FACTURA F ON V.codigo_factura=F.codigo GROUP BY P.codigo ORDER BY COUNT(*) DESC LIMIT 10;";
+            String query = "SELECT P.*,F.fecha,COUNT(*) AS VENTAS FROM PRODUCTO P INNER JOIN VENTA V ON P.codigo=V.codigo_producto INNER JOIN FACTURA F ON V.codigo_factura=F.codigo GROUP BY P.codigo,F.fecha ORDER BY COUNT(*) DESC LIMIT 10";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
-            model.addColumn("NIT");
-            model.addColumn("Nombre");
             model.addColumn("Codigo");
-            model.addColumn("Fecha");
+            model.addColumn("Nombre");
+            model.addColumn("Fabricante");
             model.addColumn("Cantidad");
-            model.addColumn("Total");
-            model.addColumn("Anticipo");
-            model.addColumn("Codigo Producto");
+            model.addColumn("Precio");
+            model.addColumn("Descripcion");
+            model.addColumn("Garantia");
+            model.addColumn("Tienda");
+            model.addColumn("Fecha");
             while (Result.next()) {
                 Object[] filas = new Object[cantidadColumnas];
                 for (int i = 0; i < cantidadColumnas; i++) {
