@@ -10,6 +10,10 @@ import Reportes.Reporte1;
 import Reportes.Reporte3;
 import Reportes.Reporte4;
 import Reportes.Reporte2;
+import Reportes.Reporte7;
+import Reportes.Reporte8;
+import Reportes.Reporte9;
+import Reportes.ReportesMenu;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -52,6 +56,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,58 +71,77 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoIntelaf.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 80));
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loginicono.png"))); // NOI18N
         jButton1.setText("Cargar Datos");
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 130, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 130, 40));
 
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
+        jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Usuarios.png"))); // NOI18N
         jButton2.setText("Usuarios");
+        jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, 40));
 
+        jButton3.setBackground(new java.awt.Color(153, 153, 153));
+        jButton3.setForeground(new java.awt.Color(51, 51, 51));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reloj.png"))); // NOI18N
         jButton3.setText("Tiempo");
+        jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 120, 40));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 120, 40));
 
+        jButton4.setBackground(new java.awt.Color(153, 153, 153));
+        jButton4.setForeground(new java.awt.Color(51, 51, 51));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventas.png"))); // NOI18N
         jButton4.setText("Ventas");
+        jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 120, 40));
 
+        jButton5.setBackground(new java.awt.Color(153, 153, 153));
+        jButton5.setForeground(new java.awt.Color(51, 51, 51));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconotiende.png"))); // NOI18N
         jButton5.setText("Tiendas");
+        jButton5.setBorder(null);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 120, 40));
 
+        jButton6.setBackground(new java.awt.Color(153, 153, 153));
+        jButton6.setForeground(new java.awt.Color(51, 51, 51));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoComprar.png"))); // NOI18N
         jButton6.setText("Productos");
+        jButton6.setBorder(null);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 140, -1));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 130, 40));
 
         jPanel1.add(combotienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 180, 30));
 
@@ -125,29 +149,44 @@ public class MenuEmpresa extends javax.swing.JFrame {
         jLabel5.setText("Tienda Actual:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 110, 30));
 
+        jButton8.setBackground(new java.awt.Color(153, 153, 153));
+        jButton8.setForeground(new java.awt.Color(51, 51, 51));
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reloj.png"))); // NOI18N
         jButton8.setText("Pedidos");
+        jButton8.setBorder(null);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 90, 40));
+        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 120, 40));
 
+        jButton9.setBackground(new java.awt.Color(153, 153, 153));
+        jButton9.setForeground(new java.awt.Color(51, 51, 51));
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Descripcion.png"))); // NOI18N
         jButton9.setText("Visualizar/Modificar");
+        jButton9.setBorder(null);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 180, 40));
+        jPanel1.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 180, 40));
 
-        jButton7.setText("Reporte");
+        jButton7.setBackground(new java.awt.Color(153, 153, 153));
+        jButton7.setForeground(new java.awt.Color(51, 51, 51));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fabricante.png"))); // NOI18N
+        jButton7.setText("Reportes");
+        jButton7.setBorder(null);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 130, 40));
+
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 580, 250));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoNuevaTienda.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -226,7 +265,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        Reporte4 reporte = new Reporte4();
+        ReportesMenu reporte = new ReportesMenu();
         reporte.setVisible(true);
         codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -279,6 +318,7 @@ public class MenuEmpresa extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

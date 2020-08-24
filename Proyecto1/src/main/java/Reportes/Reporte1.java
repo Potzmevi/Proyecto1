@@ -7,13 +7,15 @@ package Reportes;
 
 import BackEnd.Main;
 import FrontEnd.MenuEmpresa;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,9 +46,11 @@ public class Reporte1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pedidotable = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Pedidos:");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -68,12 +72,24 @@ public class Reporte1 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(pedidotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 530, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 530, 270));
 
         jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Listado de Pedidos:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loginicono.png"))); // NOI18N
+        jButton1.setText("Generar Reporte");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 170, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoFactura.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -93,15 +109,66 @@ public class Reporte1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       llenarTabla( "SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
-       
+        llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
-     public void llenarTabla( String accion, boolean cliente, JTable tabla, String value, String tienda) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CrearArchivo(pedidotable, "Tiendas");
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void CrearArchivo(JTable tabla, String titulo) {
+        try {
+            PrintWriter writer = new PrintWriter("Reportes/Reporte.html", "UTF-8");
+            writer.println("<html>");
+            writer.println("<h1><center>" + titulo + "</center</h1>");
+            writer.println("<style type=" + "\"" + "text/css" + "\"" + ">");
+            writer.println("table, th, td {");
+            writer.println("border: 1px solid black;");
+            writer.println("border-collapse: collapse;");
+            writer.println("}");
+            writer.println(" th, td {");
+            writer.println("padding: 10px;");
+            writer.println("}");
+            writer.println(" th {");
+            writer.println("background-color: #246355;");
+            writer.println("border-bottom: solid 5px #0F362D;");
+            writer.println("color: white;");
+            writer.println("}");
+            writer.println(" tr:nth-child(even) {");
+            writer.println("background-color: #ddd;");
+            writer.println("}");
+            writer.println(" tr:hover td{");
+            writer.println("background-color: #369681;");
+            writer.println("color: white;");
+            writer.println("}");
+            writer.println("</style>");
+            writer.println("<table style=" + "\"" + "width: 100%" + "\"" + " >");
+            writer.println("<tr>");
+            for (int i = 0; i < tabla.getColumnCount(); i++) {
+                writer.println("<th><strong>" + tabla.getColumnName(i) + "</strong></th>");
+
+            }
+            writer.println("</tr>");
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                writer.println("<tr>");
+                for (int j = 0; j < tabla.getColumnCount(); j++) {
+                    writer.println("<td>" + tabla.getModel().getValueAt(i, j).toString() + "</td>");
+
+                }
+                writer.println("<tr>");
+            }
+            writer.println("</table>");
+            writer.println("</html>");
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";
 
-        where = "WHERE  codigo_tienda2='"+MenuEmpresa.codigoTiendaOrigen+"'";
+        where = "WHERE  codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
         try {
             DefaultTableModel model = new DefaultTableModel() {
                 @Override
@@ -110,7 +177,7 @@ public class Reporte1 extends javax.swing.JFrame {
                 }
             };
             tabla.setModel(model);
-            String query = "SELECT P.* FROM PEDIDO P LEFT JOIN RECIBO R ON P.codigo = R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda2='"+MenuEmpresa.codigoTiendaOrigen+"'";
+            String query = "SELECT P.* FROM PEDIDO P LEFT JOIN RECIBO R ON P.codigo = R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
@@ -135,7 +202,6 @@ public class Reporte1 extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * @param args the command line arguments
      */
@@ -173,6 +239,7 @@ public class Reporte1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;

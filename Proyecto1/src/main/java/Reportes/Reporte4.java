@@ -7,6 +7,7 @@ package Reportes;
 
 import BackEnd.Main;
 import FrontEnd.MenuEmpresa;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -41,6 +42,7 @@ public class Reporte4 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pedidotable = new javax.swing.JTable();
@@ -55,6 +57,18 @@ public class Reporte4 extends javax.swing.JFrame {
         });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
+        jButton2.setForeground(new java.awt.Color(204, 204, 204));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loginicono.png"))); // NOI18N
+        jButton2.setText("Generar Reporte");
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 170, 30));
 
         jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
@@ -74,7 +88,7 @@ public class Reporte4 extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(pedidotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 80, 580, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 80, 580, 210));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Reporte4.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 350));
@@ -97,6 +111,57 @@ public class Reporte4 extends javax.swing.JFrame {
         llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        CrearArchivo(pedidotable, "Pedidos en Transito:");
+    }//GEN-LAST:event_jButton2ActionPerformed
+public void CrearArchivo(JTable tabla, String titulo) {
+        try {
+            PrintWriter writer = new PrintWriter("Reportes/Reporte.html", "UTF-8");
+            writer.println("<html>");
+            writer.println("<h1><center>" + titulo + "</center</h1>");
+            writer.println("<style type=" + "\"" + "text/css" + "\"" + ">");
+            writer.println("table, th, td {");
+            writer.println("border: 1px solid black;");
+            writer.println("border-collapse: collapse;");
+            writer.println("}");
+            writer.println(" th, td {");
+            writer.println("padding: 10px;");
+            writer.println("}");
+            writer.println(" th {");
+            writer.println("background-color: #246355;");
+            writer.println("border-bottom: solid 5px #0F362D;");
+            writer.println("color: white;");
+            writer.println("}");
+            writer.println(" tr:nth-child(even) {");
+            writer.println("background-color: #ddd;");
+            writer.println("}");
+            writer.println(" tr:hover td{");
+            writer.println("background-color: #369681;");
+            writer.println("color: white;");
+            writer.println("}");
+            writer.println("</style>");
+            writer.println("<table style=" + "\"" + "width: 100%" + "\"" + " >");
+            writer.println("<tr>");
+            for (int i = 0; i < tabla.getColumnCount(); i++) {
+                writer.println("<th><strong>" + tabla.getColumnName(i) + "</strong></th>");
+
+            }
+            writer.println("</tr>");
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                writer.println("<tr>");
+                for (int j = 0; j < tabla.getColumnCount(); j++) {
+                    writer.println("<td>" + tabla.getModel().getValueAt(i, j).toString() + "</td>");
+
+                }
+                writer.println("<tr>");
+            }
+            writer.println("</table>");
+            writer.println("</html>");
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public boolean compararRetraso(int dias, String fechape) {
         boolean retraso = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -189,6 +254,7 @@ public class Reporte4 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
