@@ -1,0 +1,56 @@
+<html>
+<h1><center>Pedidos Del Cliente:</center</h1>
+<style type="text/css">
+table, th, td {
+border: 1px solid black;
+border-collapse: collapse;
+}
+ th, td {
+padding: 10px;
+}
+ th {
+background-color: #246355;
+border-bottom: solid 5px #0F362D;
+color: white;
+}
+ tr:nth-child(even) {
+background-color: #ddd;
+}
+ tr:hover td{
+background-color: #369681;
+color: white;
+}
+</style>
+<table style="width: 100%" >
+<tr>
+<th><strong>NIT</strong></th>
+<th><strong>Nombre</strong></th>
+<th><strong>Codigo</strong></th>
+<th><strong>Fecha</strong></th>
+<th><strong>Cantidad</strong></th>
+<th><strong>Total</strong></th>
+<th><strong>Anticipo</strong></th>
+<th><strong>Codigo Producto</strong></th>
+</tr>
+<tr>
+<td>L-4025</td>
+<td>Nombre RT</td>
+<td>8</td>
+<td>2020-06-09</td>
+<td>4</td>
+<td>232.52</td>
+<td>58.25</td>
+<td>UVU-8844</td>
+<tr>
+<tr>
+<td>L-4025</td>
+<td>Nombre RT</td>
+<td>9</td>
+<td>2020-06-09</td>
+<td>4</td>
+<td>232.52</td>
+<td>58.25</td>
+<td>UVU-8844</td>
+<tr>
+</table>
+</html>

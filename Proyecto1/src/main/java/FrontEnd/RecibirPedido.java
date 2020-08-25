@@ -29,7 +29,7 @@ public class RecibirPedido extends javax.swing.JFrame {
      * Creates new form RecibirPedido
      */
     public RecibirPedido() {
-      initComponents();
+        initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
     }
@@ -51,6 +51,8 @@ public class RecibirPedido extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fecha1txt = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -88,7 +90,7 @@ public class RecibirPedido extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 180, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 180, 50));
 
         codigotxt.setBackground(new java.awt.Color(153, 153, 153));
         codigotxt.setForeground(new java.awt.Color(51, 51, 51));
@@ -111,8 +113,18 @@ public class RecibirPedido extends javax.swing.JFrame {
         jLabel10.setText("Confirmar Pedido:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("Fecha:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, -1, -1));
+
+        fecha1txt.setBackground(new java.awt.Color(153, 153, 153));
+        fecha1txt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fecha1txt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jPanel1.add(fecha1txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 210, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoRecibo1.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 380));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 410));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,7 +142,7 @@ public class RecibirPedido extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = pedidotable.getSelectedRow();
-        if (filaselected >= 0) {
+        if (filaselected >= 0 && fecha1txt.getText().length() != 0) {
             String[] datos = new String[5];
             datos[0] = pedidotable.getValueAt(filaselected, 0).toString();
             datos[1] = pedidotable.getValueAt(filaselected, 1).toString();
@@ -142,7 +154,7 @@ public class RecibirPedido extends javax.swing.JFrame {
             String Query = "SELECT ID FROM TIEMPO_TIENDA WHERE ((codigo_tienda='" + datos[2] + "' && codigo_tienda2='" + datos[3] + "')||(codigo_tienda='" + datos[3] + "' && codigo_tienda2='" + datos[2] + "'))";
 
             ResultSet Result = conexion.ComboBox(Query);
-            int ID=0;
+            int ID = 0;
             try {
                 while (Result.next()) {
                     if (!(Result.equals(Result.getObject("ID")))) {
@@ -155,11 +167,13 @@ public class RecibirPedido extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error " + e);
             }
-            LocalDate fecha = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String fecha1 = fecha1txt.getText();
+            LocalDate fecha = LocalDate.parse(fecha1, formatter);
             String query2 = ("INSERT INTO RECIBO VALUES('" + 0 + "','" + fecha + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + datos[0] + "','" + ID + "')");
             Main.conexion.Insert(query2);
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor seleccione un pedido");
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un pedido e ingrese una fecha");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -223,7 +237,6 @@ public class RecibirPedido extends javax.swing.JFrame {
         });
     }
 
-
     /**
      * @param args the command line arguments
      */
@@ -261,11 +274,13 @@ public class RecibirPedido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigotxt;
+    private javax.swing.JFormattedTextField fecha1txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pedidotable;

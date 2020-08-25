@@ -78,13 +78,15 @@ public class CrearPedido extends javax.swing.JFrame {
         cantidadtxt = new javax.swing.JTextField();
         nittxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         tiendacombo = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        fecha1txt = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,8 +126,8 @@ public class CrearPedido extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Anticipo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, -1, -1));
+        jLabel5.setText("Fecha:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventas.png"))); // NOI18N
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 30, 30));
@@ -157,7 +159,7 @@ public class CrearPedido extends javax.swing.JFrame {
 
         totaltxt.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         totaltxt.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(totaltxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 140, 20));
+        jPanel1.add(totaltxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 140, 20));
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
@@ -226,12 +228,6 @@ public class CrearPedido extends javax.swing.JFrame {
         jLabel12.setText("Cliente:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
 
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 380, 240));
-
-        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 370, 240));
-
         jPanel1.add(tiendacombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 210, -1));
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -242,7 +238,7 @@ public class CrearPedido extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(51, 51, 51));
         jLabel19.setText("Total:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 350, -1, -1));
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
@@ -254,7 +250,7 @@ public class CrearPedido extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 150, 50));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 150, 50));
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setForeground(new java.awt.Color(51, 51, 51));
@@ -266,10 +262,26 @@ public class CrearPedido extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 140, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 190, 30));
+
+        fecha1txt.setBackground(new java.awt.Color(153, 153, 153));
+        fecha1txt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fecha1txt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jPanel1.add(fecha1txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 210, 30));
+
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("Anticipo:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, -1, -1));
+
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 380, 310));
+
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 370, 260));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoVenta.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 450));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,7 +323,7 @@ public class CrearPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        RecibirPedido recibir= new RecibirPedido();
+        RecibirPedido recibir = new RecibirPedido();
         recibir.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -325,9 +337,11 @@ public class CrearPedido extends javax.swing.JFrame {
         if (NITCLIENTE == "") {
             JOptionPane.showMessageDialog(null, "Por favor seleccione un cliente");
         } else {
-            if (anticipotxt.getText().length() != 0) {
-                if (Double.parseDouble(anticipotxt.getText()) >= anticipoprueba) {
-                    if (filaselected >= 0 && cantidadtxt.getText().length() != 0) {
+
+            if (filaselected >= 0 && cantidadtxt.getText().length() != 0 && fecha1txt.getText().length() != 0) {
+                if (anticipotxt.getText().length() != 0) {
+                    if (Double.parseDouble(anticipotxt.getText()) >= anticipoprueba) {
+
                         int cantidadint = Integer.parseInt(cantidadtxt.getText());
                         String cant = productotable.getValueAt(filaselected, 3).toString();
                         if (Integer.parseInt(cant) >= cantidadint && Integer.parseInt(cant) > 0) {
@@ -339,8 +353,10 @@ public class CrearPedido extends javax.swing.JFrame {
                             datos[3] = cantidadtxt.getText();
 
                             Double getcredito = Double.parseDouble(clientetable.getValueAt(filacliente, 2).toString());
-                            Double totalfinal =Double.parseDouble( totaltxt.getText());
-                            LocalDate fecha = LocalDate.now();
+                            Double totalfinal = Double.parseDouble(totaltxt.getText());
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            String fecha1 = fecha1txt.getText();
+                            LocalDate fecha = LocalDate.parse(fecha1, formatter);
                             String tiendadestino = tiendacombo.getSelectedItem().toString();
                             int newcantidad = Integer.parseInt(cant) - cantidadint;
                             String query = ("UPDATE PRODUCTO SET cantidad = '" + newcantidad + "' WHERE codigo='" + datos[0] + "'");
@@ -359,7 +375,7 @@ public class CrearPedido extends javax.swing.JFrame {
                                     Main.conexion.Insert(query2);
                                 } else {
                                     totaltxt.setText(totalfinal.toString());
-                                    anticipo=getcredito-anticipo;
+                                    anticipo = getcredito - anticipo;
                                     query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + NITCLIENTE + "'");
                                     Main.conexion.Insert(query);
                                     String query2 = ("INSERT INTO PEDIDO VALUES('" + 0 + "','" + fecha + "','" + cantidadint + "','" + totalfinal + "','" + anticipo + "','" + datos[0] + "','" + NITCLIENTE + "','" + MenuEmpresa.codigoTiendaOrigen + "','" + tiendadestino + "')");
@@ -370,6 +386,7 @@ public class CrearPedido extends javax.swing.JFrame {
                                 cantidadtxt.setText("");
                                 codigotxt.setText("");
                                 nittxt.setText("");
+                                fecha1txt.setText("");
                             }
                             llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
 
@@ -379,14 +396,14 @@ public class CrearPedido extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "No hay la cantidad del producto solicitado en esta tienda");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Por favor seleccione un producto e ingrese una cantidad");
+                        JOptionPane.showMessageDialog(null, "Ingrese un anticipo mayor al 25%");
                     }
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Ingrese un anticipo mayor al 25%");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Ingrese un anticipo mayor al 25%");
+                JOptionPane.showMessageDialog(null, "Por favor seleccione un producto, ingrese una cantidad e ingrese la fecha");
             }
 
         }
@@ -542,6 +559,7 @@ public class CrearPedido extends javax.swing.JFrame {
     private javax.swing.JTextField cantidadtxt;
     private javax.swing.JTable clientetable;
     private javax.swing.JTextField codigotxt;
+    private javax.swing.JFormattedTextField fecha1txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -561,6 +579,7 @@ public class CrearPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

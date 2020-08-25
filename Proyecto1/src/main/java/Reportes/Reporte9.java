@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Reportes;
+
 import BackEnd.Main;
 import FrontEnd.MenuEmpresa;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author potz
@@ -42,6 +44,8 @@ public class Reporte9 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pedidotable = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        Nombretxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,7 +88,16 @@ public class Reporte9 extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 170, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 170, 30));
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Nombre del Reporte:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 150, 20));
+
+        Nombretxt.setBackground(new java.awt.Color(153, 153, 153));
+        Nombretxt.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.add(Nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 150, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoVisualizarTienda.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 450));
@@ -104,62 +117,69 @@ public class Reporte9 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       llenarTabla("SELECT P.codigo,P.nombre,P.fabricante,P.cantidad,P.precio,P.codigo_tienda FROM PRODUCTO P LEFT JOIN VENTA V ON P.codigo=V.codigo_producto WHERE V.ID IS NULL && P.codigo_tienda='"+MenuEmpresa.codigoTiendaOrigen +"' GROUP BY P.codigo ORDER BY COUNT(P.codigo) DESC", true, pedidotable, "codigo", "");
+        llenarTabla("SELECT P.codigo,P.nombre,P.fabricante,P.cantidad,P.precio,P.codigo_tienda FROM PRODUCTO P LEFT JOIN VENTA V ON P.codigo=V.codigo_producto WHERE V.ID IS NULL && P.codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "' GROUP BY P.codigo ORDER BY COUNT(P.codigo) DESC", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CrearArchivo(pedidotable, "Productos nunca vendidos:");
     }//GEN-LAST:event_jButton3ActionPerformed
-public void CrearArchivo(JTable tabla, String titulo) {
-        try {
-            PrintWriter writer = new PrintWriter("Reportes/Reporte.html", "UTF-8");
-            writer.println("<html>");
-            writer.println("<h1><center>" + titulo + "</center</h1>");
-            writer.println("<style type=" + "\"" + "text/css" + "\"" + ">");
-            writer.println("table, th, td {");
-            writer.println("border: 1px solid black;");
-            writer.println("border-collapse: collapse;");
-            writer.println("}");
-            writer.println(" th, td {");
-            writer.println("padding: 10px;");
-            writer.println("}");
-            writer.println(" th {");
-            writer.println("background-color: #246355;");
-            writer.println("border-bottom: solid 5px #0F362D;");
-            writer.println("color: white;");
-            writer.println("}");
-            writer.println(" tr:nth-child(even) {");
-            writer.println("background-color: #ddd;");
-            writer.println("}");
-            writer.println(" tr:hover td{");
-            writer.println("background-color: #369681;");
-            writer.println("color: white;");
-            writer.println("}");
-            writer.println("</style>");
-            writer.println("<table style=" + "\"" + "width: 100%" + "\"" + " >");
-            writer.println("<tr>");
-            for (int i = 0; i < tabla.getColumnCount(); i++) {
-                writer.println("<th><strong>" + tabla.getColumnName(i) + "</strong></th>");
+    public void CrearArchivo(JTable tabla, String titulo) {
+        if (Nombretxt.getText().length() != 0) {
+            try {
+                PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
+                writer.println("<html>");
+                writer.println("<h1><center>" + titulo + "</center</h1>");
+                writer.println("<style type=" + "\"" + "text/css" + "\"" + ">");
+                writer.println("table, th, td {");
+                writer.println("border: 1px solid black;");
+                writer.println("border-collapse: collapse;");
+                writer.println("}");
+                writer.println(" th, td {");
+                writer.println("padding: 10px;");
 
-            }
-            writer.println("</tr>");
-            for (int i = 0; i < tabla.getRowCount(); i++) {
+                writer.println("}");
+                writer.println(" th {");
+                writer.println("background-color: #246355;");
+                writer.println("border-bottom: solid 5px #0F362D;");
+                writer.println("color: white;");
+                writer.println("}");
+                writer.println(" tr:nth-child(even) {");
+                writer.println("background-color: #ddd;");
+                writer.println("}");
+                writer.println(" tr:hover td{");
+                writer.println("background-color: #369681;");
+                writer.println("color: white;");
+                writer.println("}");
+                writer.println("</style>");
+                writer.println("<table style=" + "\"" + "width: 100%" + "\"" + " >");
                 writer.println("<tr>");
-                for (int j = 0; j < tabla.getColumnCount(); j++) {
-                    writer.println("<td>" + tabla.getModel().getValueAt(i, j).toString() + "</td>");
+                for (int i = 0; i < tabla.getColumnCount(); i++) {
+                    writer.println("<th><strong>" + tabla.getColumnName(i) + "</strong></th>");
 
                 }
-                writer.println("<tr>");
+                writer.println("</tr>");
+                for (int i = 0; i < tabla.getRowCount(); i++) {
+                    writer.println("<tr>");
+                    for (int j = 0; j < tabla.getColumnCount(); j++) {
+                        writer.println("<td>" + tabla.getModel().getValueAt(i, j).toString() + "</td>");
+
+                    }
+                    writer.println("<tr>");
+                }
+                writer.println("</table>");
+                writer.println("</html>");
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            writer.println("</table>");
-            writer.println("</html>");
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor llene el nombre del archivo");
         }
     }
     
-     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
+     
+
+    public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";
 
@@ -194,8 +214,6 @@ public void CrearArchivo(JTable tabla, String titulo) {
         }
     }
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -232,9 +250,11 @@ public void CrearArchivo(JTable tabla, String titulo) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Nombretxt;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pedidotable;
