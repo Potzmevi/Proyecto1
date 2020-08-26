@@ -123,6 +123,13 @@ public class Reporte9 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CrearArchivo(pedidotable, "Productos nunca vendidos:");
     }//GEN-LAST:event_jButton3ActionPerformed
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y
+     * el titulo de este
+     *
+     * @param tabla
+     * @param titulo
+     */
     public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
@@ -178,7 +185,14 @@ public class Reporte9 extends javax.swing.JFrame {
     }
     
      
-
+/**
+ * Llenamos la tabla con los productos que nunca se han vendido
+ * @param accion
+ * @param cliente
+ * @param tabla
+ * @param value
+ * @param tienda 
+ */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";

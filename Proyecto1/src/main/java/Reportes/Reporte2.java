@@ -129,7 +129,12 @@ public class Reporte2 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CrearArchivo(pedidotable, "Pedidos a Tiempo:");
     }//GEN-LAST:event_jButton1ActionPerformed
- public void CrearArchivo(JTable tabla, String titulo) {
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y el titulo de este
+     * @param tabla
+     * @param titulo 
+     */
+    public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
                 PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
@@ -182,6 +187,12 @@ public class Reporte2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor llene el nombre del archivo");
         }
     }
+ /**
+  * Metodo para comprobar si el pedido se retraso con la fecha actual
+  * @param dias
+  * @param fechape
+  * @return 
+  */
     public boolean compararRetraso(int dias, String fechape) {
         boolean retraso = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -197,6 +208,14 @@ public class Reporte2 extends javax.swing.JFrame {
         return retraso;
     }
 
+    /**
+     * Metodo para llenar la tabla con los pedidos 
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String where = "";
 

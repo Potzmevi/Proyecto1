@@ -301,11 +301,16 @@ public class CrearPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_anticipotxtActionPerformed
 
+    /**
+     * Llamamos el metodo para llenar las tablas de cliente y producto
+     * Llenamos el combobox para seleccionar tienda con las tiendas existentes pero diferente a la actual
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
 
         llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda!='" + MenuEmpresa.codigoTiendaOrigen + "'");
-        Keilstener();
+        Keylstener();
 
         String Query = "SELECT codigo FROM TIENDA";
         ResultSet Result = Main.conexion.ComboBox(Query);
@@ -326,7 +331,10 @@ public class CrearPedido extends javax.swing.JFrame {
         RecibirPedido recibir = new RecibirPedido();
         recibir.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+/**
+ * Creamos el pedido comprobando que todos los datos esten bien y que haya ingresado todo correctamente
+ * @param evt 
+ */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filacliente = clientetable.getSelectedRow();
         int filaselected = productotable.getSelectedRow();
@@ -409,10 +417,23 @@ public class CrearPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Llamamos al formulario para vender pedido
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         VentaPedido venta = new VentaPedido();
         venta.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+    /**
+     * Metodo para llenar las tablas segun query mandada y datos
+     * @param filtro
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = filtro.getText();
         String where = "";
@@ -454,7 +475,10 @@ public class CrearPedido extends javax.swing.JFrame {
         }
     }
 
-    public void Keilstener() {
+    /**
+     * Metodo keylistener para leer cada tecla pulsada por el usuario
+     */
+    public void Keylstener() {
         nittxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
@@ -505,6 +529,9 @@ public class CrearPedido extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Metodo para hacer la suma del total de la venta
+     */
     public void sumartotal() {
         double p = 0;
         try {

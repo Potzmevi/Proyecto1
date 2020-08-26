@@ -140,6 +140,11 @@ public class VentaPedido extends javax.swing.JFrame {
         Keylstener();
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Realizamos la venta del pedido y comprobamos si el pedido llego a tiempo o si llego tarde
+     * Tambien se comprueba si el anticipo era mayor al total para devolverle dinero al cliente
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = recibotable.getSelectedRow();
         String[] datosrecibo = new String[5];
@@ -179,19 +184,19 @@ public class VentaPedido extends javax.swing.JFrame {
                             
                             if (Double.parseDouble(datos[3]) >= Double.parseDouble(datos[2])) {
                                 double anticipo = (Double.parseDouble(datos[2]) * 0.05) + Double.parseDouble(datos[3]);
-                                JOptionPane.showMessageDialog(null, anticipo);
                                 query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + datos[5] + "'");
                                 Main.conexion.Insert(query);
+                                JOptionPane.showMessageDialog(null, "Pedido Vendido con retraso, se le devuelve 5% del total");
                             }else{
                                  
                                 double anticipo = (Double.parseDouble(datos[2]) * 0.02) + Double.parseDouble(datos[3]);
-                                JOptionPane.showMessageDialog(null, anticipo+" "+datos[2]+" "+datos[3]);
                                 query = ("UPDATE CLIENTE SET credito = '" + anticipo + "' WHERE NIT='" + datos[5] + "'");
                                 Main.conexion.Insert(query);
+                                JOptionPane.showMessageDialog(null, "Pedido Vendido con retraso, se le devuelve 2% del total");
                             }
-
+                            
                         } else {
-                            JOptionPane.showConfirmDialog(null, "Si llego a tiempo");
+                            JOptionPane.showMessageDialog(null, "Pedido Vendido a tiempo");
                         }
 
                     }
@@ -207,6 +212,15 @@ public class VentaPedido extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Metodo para llenar la tabla de pedidos
+     * @param filtro
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = filtro.getText();
         String where = "";
@@ -243,6 +257,9 @@ public class VentaPedido extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener para filtrar los pedidos
+     */
     public void Keylstener() {
         idtxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

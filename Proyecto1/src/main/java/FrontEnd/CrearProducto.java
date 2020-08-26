@@ -233,6 +233,10 @@ public class CrearProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Leemos los jtextfiel e ingresamos el producto a la base de datos
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (nombretxt.getText().length() == 0 || fabricantetxt.getText().length() == 0 || codigotxt.getText().length() == 0 || cantidadtxt.getText().length() == 0 || preciotxt.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Por favor llene todos los campos obligatorios");
@@ -262,12 +266,20 @@ public class CrearProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Restringimos para que solo se inserten numeros
+     * @param evt 
+     */
     private void cantidadtxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadtxtKeyTyped
         char c = evt.getKeyChar();
         if (c < '0' || c > '9')
             evt.consume();
     }//GEN-LAST:event_cantidadtxtKeyTyped
 
+    /**
+     * Restringimos para que solo se inserten numeros
+     * @param evt 
+     */
     private void garantiatxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_garantiatxtKeyTyped
         char c = evt.getKeyChar();
         if (c < '0' || c > '9')

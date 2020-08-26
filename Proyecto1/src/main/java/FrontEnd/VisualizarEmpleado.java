@@ -240,6 +240,10 @@ public class VisualizarEmpleado extends javax.swing.JFrame {
         Keilstener();
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Pasamos los datos de la tabla a los textfiel para verlos y editarlos
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          int filaselected = trabajadortable.getSelectedRow();
         if (filaselected >= 0) {
@@ -277,6 +281,10 @@ public class VisualizarEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigotextoActionPerformed
 
+    /**
+     * Comprobamos que todo este bien y actualizamos los datos del empleado si fueron cambiados
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int filaselected = trabajadortable.getSelectedRow();
         if (filaselected >= 0 && codigotexto.getText().length()>0 && nombre.getText().length()>0 && telefono.getText().length()>0&& dpitxt.getText().length()>0 && correo.getText().length()>0&& direccion.getText().length()>0) {
@@ -309,6 +317,7 @@ public class VisualizarEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
+     * Metodo para llenar la tabla de los empleados en la base de datos
      * @param args the command line arguments
      */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
@@ -347,6 +356,9 @@ public class VisualizarEmpleado extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener para filtrar los empleados
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

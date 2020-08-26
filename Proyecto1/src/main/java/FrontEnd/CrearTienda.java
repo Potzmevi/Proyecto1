@@ -412,6 +412,10 @@ public class CrearTienda extends javax.swing.JFrame {
       
     }//GEN-LAST:event_horariotxtKeyTyped
 
+    /**
+     * Insertar Tienda en la base de datos comprobando todos los datos correspondientes
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (nombretxt.getText().length() == 0 || direcciontxt.getText().length() == 0 || codigotxt.getText().length() == 0 || telefono1txt.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Por favor llene los primeros 4 campos");

@@ -235,11 +235,18 @@ public class VisualizarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Mostramos la tabla de los productos
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla(codigotxt, "SELECT * FROM PRODUCTO ", true, productotable, "codigo", "");
         Keilstener();
     }//GEN-LAST:event_formComponentShown
-
+ /**
+  * Pasamos los datos del producto seleccionado a los textfield para poderlos ver y editar
+  * @param evt 
+  */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = productotable.getSelectedRow();
         if (filaselected >= 0) {
@@ -300,6 +307,7 @@ public class VisualizarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
+     * Metodo para llenar la tabla de los productos
      * @param args the command line arguments
      */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
@@ -339,6 +347,9 @@ public class VisualizarProducto extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo Keylistener para filtrar los productos
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

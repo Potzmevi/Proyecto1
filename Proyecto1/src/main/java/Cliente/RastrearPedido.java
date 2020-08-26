@@ -173,7 +173,10 @@ public class RastrearPedido extends javax.swing.JFrame {
         llenarTabla(codigotxt, "", true, pedidotable, "codigo", "");
         Keylstener();
     }//GEN-LAST:event_formComponentShown
-
+/**
+ * Rastreamos el pedido seleccionado y mostramos el nombre de la tienda donde se tiene que recoger, los dias restantes y el pago que tiene que hacer le cliente
+ * @param evt 
+ */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = pedidotable.getSelectedRow();
         if (filaselected >= 0) {
@@ -206,21 +209,11 @@ public class RastrearPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public boolean compararRetraso(int dias, String fechape) {
-        boolean retraso = false;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fechapedido = fechape;
-        LocalDate fecha1 = LocalDate.parse(fechapedido, formatter);
-        LocalDate fecha2 = LocalDate.now();
-        long diasdiferencia = DAYS.between(fecha1, fecha2);
-        if ((int) diasdiferencia > dias) {
-            retraso = true;
-        } else {
-            retraso = false;
-        }
-        return retraso;
-    }
-
+    
+  
+/**
+ * Keylistener para filtrar los pedidos por id
+ */
     public void Keylstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -239,7 +232,15 @@ public class RastrearPedido extends javax.swing.JFrame {
             }
         });
     }
-
+/**
+ * Metodo para llenar la tabla de todos los pedidos
+ * @param filtro
+ * @param accion
+ * @param cliente
+ * @param tabla
+ * @param value
+ * @param tienda 
+ */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String where = "";
         String campo = filtro.getText();
@@ -272,7 +273,7 @@ public class RastrearPedido extends javax.swing.JFrame {
                 fecha[contador] = Result.getObject("fecha").toString();
 
                 Object[] filas = new Object[cantidadColumnas];
-                if (compararRetraso(diastabla[contador], fecha[contador])) {
+               
 
                     for (int i = 0; i < cantidadColumnas; i++) {
 
@@ -280,7 +281,7 @@ public class RastrearPedido extends javax.swing.JFrame {
 
                     }
                     model.addRow(filas);
-                }
+                
 
                 contador++;
             }

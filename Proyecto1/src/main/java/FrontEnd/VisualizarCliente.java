@@ -235,6 +235,10 @@ public class VisualizarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Agrega los datos a los textfiel para editarlos
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = clientetable.getSelectedRow();
         if (filaselected >= 0) {
@@ -272,6 +276,10 @@ public class VisualizarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_creditoActionPerformed
 
+    /**
+     * Comprueba que los datos esten bien y actualiza la informacion del cliente a los nuevos datos
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int filaselected = clientetable.getSelectedRow();
         if (filaselected >= 0 && nit.getText().length() > 0 && nombre.getText().length()>0 && telefono.getText().length()>0) {
@@ -309,6 +317,15 @@ public class VisualizarCliente extends javax.swing.JFrame {
         Keilstener();
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Metodo para llenar la tabla del cliente
+     * @param filtro
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = filtro.getText();
         String where = "";
@@ -345,6 +362,9 @@ public class VisualizarCliente extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener para filtrar al cliente por nit
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

@@ -234,6 +234,11 @@ public class MenuEmpresa extends javax.swing.JFrame {
         codigoTiendaOrigen = String.valueOf(combotienda.getSelectedItem());
     }//GEN-LAST:event_productosActionPerformed
 
+    /**
+     * Cargamos las tiendas existentes en un combobox y comprobamos si la base de datos esta llena
+     * Para habilitar los botones
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         String Query = "SELECT CODIGO FROM TIENDA";
         Conexion conexion = new Conexion();

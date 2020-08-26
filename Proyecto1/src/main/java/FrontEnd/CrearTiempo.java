@@ -125,6 +125,10 @@ public class CrearTiempo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Llenamos el combobox para seleccionar la tienda que sea diferente a la actual
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         String Query = "SELECT codigo FROM TIENDA";
         ResultSet Result = Main.conexion.ComboBox(Query);
@@ -142,6 +146,10 @@ public class CrearTiempo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Insertamos el tiempo en la base de datos y comprobamos si lleno los campos
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(combotiempo.getText().length()==0){
             JOptionPane.showMessageDialog(null, "Por favor ingrese el tiempo");

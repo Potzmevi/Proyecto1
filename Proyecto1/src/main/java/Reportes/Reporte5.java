@@ -143,7 +143,7 @@ public class Reporte5 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       llenarTabla("SELECT C.NIT, C.nombre, F.*  FROM CLIENTE C INNER JOIN FACTURA F ON C.NIT = F.nit_cliente ORDER BY C.NIT ASC", true, pedidotable, "codigo", "");
+        llenarTabla("SELECT C.NIT, C.nombre, F.*  FROM CLIENTE C INNER JOIN FACTURA F ON C.NIT = F.nit_cliente ORDER BY C.NIT ASC", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -151,9 +151,16 @@ public class Reporte5 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        llenarTabla("SELECT C.NIT, C.nombre, F.*  FROM CLIENTE C INNER JOIN FACTURA F ON C.NIT = F.nit_cliente WHERE C.NIT LIKE '%"+nittxt.getText()+"%' ORDER BY C.NIT ASC", true, pedidotable, "codigo", "");
+        llenarTabla("SELECT C.NIT, C.nombre, F.*  FROM CLIENTE C INNER JOIN FACTURA F ON C.NIT = F.nit_cliente WHERE C.NIT LIKE '%" + nittxt.getText() + "%' ORDER BY C.NIT ASC", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_jButton3ActionPerformed
- public void CrearArchivo(JTable tabla, String titulo) {
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y
+     * el titulo de este
+     *
+     * @param tabla
+     * @param titulo
+     */
+    public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
                 PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
@@ -202,15 +209,23 @@ public class Reporte5 extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor llene el nombre del archivo");
         }
     }
-    public void llenarTabla( String accion, boolean cliente, JTable tabla, String value, String tienda) {
+/**
+ * Metodo para llenar la tabla con los clientes
+ * @param accion
+ * @param cliente
+ * @param tabla
+ * @param value
+ * @param tienda 
+ */
+    public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";
 
-        where = "WHERE  codigo_tienda2='"+MenuEmpresa.codigoTiendaOrigen+"'";
+        where = "WHERE  codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
         try {
             DefaultTableModel model = new DefaultTableModel() {
                 @Override
@@ -241,7 +256,7 @@ public class Reporte5 extends javax.swing.JFrame {
             System.out.println(e.toString());
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */

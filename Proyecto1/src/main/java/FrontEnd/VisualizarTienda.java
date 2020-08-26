@@ -236,6 +236,10 @@ public class VisualizarTienda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigotextoActionPerformed
 
+    /**
+     * Cargamos los datos de la tienda seleccionada y los pasamos a jtextfield para poder visualizarla
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = tiendatable.getSelectedRow();
         if (filaselected >= 0) {
@@ -264,6 +268,7 @@ public class VisualizarTienda extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
+     * Metodo para llenar la tabla con las tiendas existentes
      * @param args the command line arguments
      */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
@@ -301,7 +306,9 @@ public class VisualizarTienda extends javax.swing.JFrame {
             System.out.println(e.toString());
         }
     }
-    
+    /**
+     * Keylistener para filtrar las tiendas por codigo
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

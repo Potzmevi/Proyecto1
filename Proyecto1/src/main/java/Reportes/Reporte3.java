@@ -122,13 +122,20 @@ public class Reporte3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
+        llenarTabla("SELECT * FROM PEDIDO A LEFT JOIN RECIBO B ON A.codido=B.codigo_pedido", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         CrearArchivo(pedidotable, "Pedidos Atrasados:");
     }//GEN-LAST:event_jButton2ActionPerformed
- public void CrearArchivo(JTable tabla, String titulo) {
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y
+     * el titulo de este
+     *
+     * @param tabla
+     * @param titulo
+     */
+    public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
                 PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
@@ -177,10 +184,18 @@ public class Reporte3 extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor llene el nombre del archivo");
         }
     }
+
+    /**
+     * Metodo para comprobar si el pedido se retraso con la fecha actual
+     *
+     * @param dias
+     * @param fechape
+     * @return
+     */
     public boolean compararRetraso(int dias, String fechape) {
         boolean retraso = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -196,6 +211,15 @@ public class Reporte3 extends javax.swing.JFrame {
         return retraso;
     }
 
+    /**
+     * Metodo para llenar la tabla con los pedidos
+     *
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda
+     */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String where = "";
 
@@ -211,7 +235,7 @@ public class Reporte3 extends javax.swing.JFrame {
             String query = "SELECT P.*,T.tiempo FROM PEDIDO P INNER JOIN TIEMPO_TIENDA T ON (P.codigo_tienda=T.codigo_tienda || P.codigo_tienda = T.codigo_tienda2)&&(P.codigo_tienda2=T.codigo_tienda || P.codigo_tienda2 = T.codigo_tienda2) LEFT JOIN RECIBO R ON P.codigo=R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
-                int cantidadColumnas = rsMd.getColumnCount();
+            int cantidadColumnas = rsMd.getColumnCount();
             model.addColumn("Codigo");
             model.addColumn("Fecha");
             model.addColumn("Cantidad");
@@ -230,7 +254,7 @@ public class Reporte3 extends javax.swing.JFrame {
                 fecha[contador] = Result.getObject("fecha").toString();
 
                 Object[] filas = new Object[cantidadColumnas];
-                if (compararRetraso(diastabla[contador], fecha[contador]) ) {
+                if (compararRetraso(diastabla[contador], fecha[contador])) {
 
                     for (int i = 0; i < cantidadColumnas; i++) {
 
@@ -247,7 +271,6 @@ public class Reporte3 extends javax.swing.JFrame {
         }
     }
 
-    
     /**
      * @param args the command line arguments
      */

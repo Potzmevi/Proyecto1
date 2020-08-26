@@ -126,7 +126,12 @@ public class Reporte1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CrearArchivo(pedidotable, "Tiendas");
     }//GEN-LAST:event_jButton1ActionPerformed
-     public void CrearArchivo(JTable tabla, String titulo) {
+    /**
+     * Metodo para crear el reporte en html con el reporte y titulo mandado
+     * @param tabla
+     * @param titulo 
+     */
+    public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
                 PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
@@ -180,6 +185,14 @@ public class Reporte1 extends javax.swing.JFrame {
         }
     }
 
+     /**
+      * Metodo para llenar la tabla de los pedidos
+      * @param accion
+      * @param cliente
+      * @param tabla
+      * @param value
+      * @param tienda 
+      */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";

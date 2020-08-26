@@ -115,7 +115,14 @@ public class CargarArchivo extends javax.swing.JFrame {
             jButton2.setEnabled(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+/**
+ * Este metodo interpreta todos los datos del archivo del texto y los mete en un array
+ * Llama al metodo para insertar los datos en la base de datos 
+ * Usamos un buffered reader para leer los datos
+ * @param archivo
+ * @throws FileNotFoundException
+ * @throws IOException 
+ */
     public static void muestraContenido(File archivo) throws FileNotFoundException, IOException {
         String frase = "";
         String linea = "";
@@ -147,6 +154,11 @@ public class CargarArchivo extends javax.swing.JFrame {
         }
 
     }
+    /**
+     * llamamos el metodo para leer el archivo
+     * Insertamos los datos en la base
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             muestraContenido(h);
@@ -155,6 +167,10 @@ public class CargarArchivo extends javax.swing.JFrame {
         }
         InsertarDatos();
     }//GEN-LAST:event_jButton2ActionPerformed
+    /**
+     * Metodo para insertar los datos en nuestra base
+     * Usamos querys y comprobamos cada dato para meterlo donde es
+     */
     public static void InsertarDatos() {
         if (atributos[0].equals("TIENDA")) {
 
@@ -183,6 +199,11 @@ public class CargarArchivo extends javax.swing.JFrame {
             Main.conexion.Insert(query);
         }
     }
+    /**
+     * Comprobamos si la base de datos esta vacia o no
+     * Habilitamos los botones si esta vacia para seleccionar un archivo de texto
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         String[] Nombres = {"TIENDA", "CLIENTE", "TIEMPO_TIENDA", "FACTURA", "EMPLEADO", "PRODUCTO", "VENTA", "PEDIDO", "RECIBO"};
         String Query = "";

@@ -143,6 +143,15 @@ public class CatalogoProductos extends javax.swing.JFrame {
         Keilstener();
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Metodo para llenar la jtable de todos los productos de la base de datos
+     * @param filtro
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
      public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = codigotxt.getText();
         String where = "";
@@ -188,6 +197,9 @@ public class CatalogoProductos extends javax.swing.JFrame {
         }
     }
 
+     /**
+      * Keylistener para filtrar los productos
+      */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

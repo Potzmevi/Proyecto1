@@ -20,6 +20,8 @@ public class CrearUsuario extends javax.swing.JFrame {
      */
     public CrearUsuario() {
         initComponents();
+         this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -327,7 +329,10 @@ public class CrearUsuario extends javax.swing.JFrame {
     private void telefonotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonotxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonotxtActionPerformed
-
+    /**
+     * Ingresamos un empleado o un Cliente dependiendo de que haya seleccionado el usuario
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jRadioButton1.isSelected() == false && jRadioButton2.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Por favor seleccione si desea ingresar un cliente o un empleado");
@@ -378,6 +383,9 @@ public class CrearUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Limpiamos los campos
+     */
     public void Reiniciar() {
         codigotxt.setText("");
         nombretxt.setText("");

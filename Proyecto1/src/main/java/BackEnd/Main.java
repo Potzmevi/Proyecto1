@@ -12,6 +12,7 @@ import FrontEnd.Login;
 import FrontEnd.CrearTiempo;
 import FrontEnd.CrearTienda;
 import FrontEnd.MenuEmpresa;
+import java.io.File;
 
 
 /**
@@ -21,7 +22,19 @@ import FrontEnd.MenuEmpresa;
 public class Main {
     public static Conexion conexion = new Conexion();
         
+    /**
+     * Main, Mandamos a llamar nuestro form para ingresar y creamos una conexion global
+     * Establecemos la conexion
+     * Creamos nuestra carpeta para guardar los reportes
+     * @param args 
+     */
     public static void main(String[] args) {
+         File directorio = new File("Reportes");
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio reportes creados");
+            }
+        }
         Ingresar ingresar = new Ingresar();
         ingresar.setVisible(true);
         conexion.conexionDB();

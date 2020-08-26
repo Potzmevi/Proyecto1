@@ -140,6 +140,11 @@ public class RecibirPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creamos un recibo al confirmar el pedido que ya llego a la tienda y lo insertamos a la base de datos
+     * Comprobamos que los datos esten de acuerdo
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = pedidotable.getSelectedRow();
         if (filaselected >= 0 && fecha1txt.getText().length() != 0) {
@@ -177,11 +182,24 @@ public class RecibirPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Llenamos la tabla de pedidos llamando el metodo de llenar tablas
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla(codigotxt, "SELECT codigo, fecha, codigo_tienda, codigo_tienda2, total FROM PEDIDO ", true, pedidotable, "codigo", "");
         Keilstener();
 
     }//GEN-LAST:event_formComponentShown
+   /**
+    * Metodo para llenar la tabla de pedidos con query
+    * @param filtro
+    * @param accion
+    * @param cliente
+    * @param tabla
+    * @param value
+    * @param tienda 
+    */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = filtro.getText();
         String where = "";
@@ -218,6 +236,9 @@ public class RecibirPedido extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener que sirve como filtro
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

@@ -161,6 +161,10 @@ public class VisualizarTiempo extends javax.swing.JFrame {
         Keilstener();
     }//GEN-LAST:event_formComponentShown
 
+    /**
+     * Cargamos los datos del tiempo y los pasamos a un jtextfield para editarlo
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filaselected = tiempotable.getSelectedRow();
         if (filaselected >= 0) {
@@ -184,6 +188,10 @@ public class VisualizarTiempo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tiempoActionPerformed
 
+    /**
+     * Cargamos el nuevo dato del tiempo si este fue cambiado
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int filaselected = tiempotable.getSelectedRow();
         if (filaselected >= 0 && tiempo.getText().length()>0) {
@@ -209,6 +217,7 @@ public class VisualizarTiempo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
+     * Metodo para llenar la tabla del tiempo entre tiendas
      * @param args the command line arguments
      */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
@@ -244,6 +253,9 @@ public class VisualizarTiempo extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener para filtrar los tiempos
+     */
     public void Keilstener() {
         codigotxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override

@@ -84,6 +84,7 @@ public class CrearVenta extends javax.swing.JFrame {
         cantidadtxt = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        Comprarbutton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -109,10 +110,10 @@ public class CrearVenta extends javax.swing.JFrame {
         jLabel3.setText("Seleccionar producto:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Crear Venta:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         Comprarbutton.setBackground(new java.awt.Color(153, 153, 153));
         Comprarbutton.setForeground(new java.awt.Color(51, 51, 51));
@@ -124,7 +125,7 @@ public class CrearVenta extends javax.swing.JFrame {
                 ComprarbuttonActionPerformed(evt);
             }
         });
-        jPanel1.add(Comprarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 150, 50));
+        jPanel1.add(Comprarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 150, 50));
 
         totallabel.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         totallabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -307,7 +308,7 @@ public class CrearVenta extends javax.swing.JFrame {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, -1, -1));
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, -1, -1));
 
         jRadioButton2.setText("Credito");
         jRadioButton2.setOpaque(false);
@@ -316,7 +317,19 @@ public class CrearVenta extends javax.swing.JFrame {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+
+        Comprarbutton1.setBackground(new java.awt.Color(153, 153, 153));
+        Comprarbutton1.setForeground(new java.awt.Color(51, 51, 51));
+        Comprarbutton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrito.png"))); // NOI18N
+        Comprarbutton1.setText("Vaciar Carrito");
+        Comprarbutton1.setBorder(null);
+        Comprarbutton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Comprarbutton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Comprarbutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 150, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoVenta.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 510));
@@ -339,11 +352,15 @@ public class CrearVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_codigotxtActionPerformed
 
+    /**
+     * Llenamos las tablas de Clientes y de Productos mandando una query a la base de datos
+     * @param evt 
+     */
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
         llenarTabla(codigotxt, "SELECT codigo, nombre, precio, cantidad FROM PRODUCTO ", false, productotable, "codigo", "&& codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "'");
         Keilstener();
-
+        model = new DefaultTableModel();
         carritotable.setModel(model);
         model.addColumn("Codigo");
         model.addColumn("Nombre");
@@ -359,6 +376,10 @@ public class CrearVenta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nittxtKeyTyped
 
+    /**
+     * Enviamos el articulo seleccionado con la cantidad ingresada y el cliente seleccionado
+     * @param evt 
+     */
     private void enviarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarbuttonActionPerformed
         filacliente = clientetable.getSelectedRow();
         int filaselected = productotable.getSelectedRow();
@@ -406,53 +427,70 @@ public class CrearVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_enviarbuttonActionPerformed
 
     private void cantidadtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadtxtActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cantidadtxtActionPerformed
 
+    /**
+     * Comprobamos que articulo va a comprar, el metodo de pago y actualizamos los datos del cliente si pago con credito
+     * Descontamos el producto
+     * @param evt 
+     */
     private void ComprarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarbuttonActionPerformed
-        Double total = 0.0;
-        Double totaldellabel = 0.0;
-        Double cantidadfinal = 0.0;
-        total = Double.parseDouble(totallabel.getText());
-        String codigo_tienda = MenuEmpresa.codigoTiendaOrigen;
 
-        String query = ("INSERT INTO FACTURA VALUES('" + 0 + "','" + total + "','" + fecha + "','" + codigo_tienda + "','" + NITCLIENTE + "')");
-        int codigo_factura = Main.conexion.InsertVenta(query);
+        if (carritotable.getRowCount() > 0 && (jRadioButton1.isEnabled() || jRadioButton2.isEnabled())) {
+            Double total = 0.0;
+            Double totaldellabel = 0.0;
+            Double cantidadfinal = 0.0;
+            total = Double.parseDouble(totallabel.getText());
+            String codigo_tienda = MenuEmpresa.codigoTiendaOrigen;
 
-        for (int i = 0; i < carritotable.getRowCount(); i++) {
-            int cantidad = Integer.parseInt(carritotable.getValueAt(i, 3).toString());
-            Double precio = Double.parseDouble(carritotable.getValueAt(i, 2).toString());
-            String codigo_producto = carritotable.getValueAt(i, 0).toString();
-            String query2 = ("INSERT INTO VENTA VALUES('" + 0 + "','" + cantidad + "','" + precio + "','" + codigo_producto + "','" + codigo_factura + "')");
-            Main.conexion.Insert(query2);
-        }
+            String query = ("INSERT INTO FACTURA VALUES('" + 0 + "','" + total + "','" + fecha + "','" + codigo_tienda + "','" + NITCLIENTE + "')");
+            int codigo_factura = Main.conexion.InsertVenta(query);
 
-        totaldellabel = Double.parseDouble(totallabel.getText());
-        cantidadfinal = getcredito - total;
-        JOptionPane.showMessageDialog(null, getcredito + " " + filacliente);
-        if (jRadioButton2.isSelected() == true) {
-            if (getcredito >= totaldellabel) {
-                query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
-                Main.conexion.Insert(query);
-                totallabel.setText("0");
-            } else if (getcredito < totaldellabel) {
-                cantidadfinal = 0.0;
-                query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
-                Main.conexion.Insert(query);
-                totallabel.setText(String.valueOf(totaldellabel - getcredito));
+            for (int i = 0; i < carritotable.getRowCount(); i++) {
+                int cantidad = Integer.parseInt(carritotable.getValueAt(i, 3).toString());
+                Double precio = Double.parseDouble(carritotable.getValueAt(i, 2).toString());
+                String codigo_producto = carritotable.getValueAt(i, 0).toString();
+                String query2 = ("INSERT INTO VENTA VALUES('" + 0 + "','" + cantidad + "','" + precio + "','" + codigo_producto + "','" + codigo_factura + "')");
+                Main.conexion.Insert(query2);
+            }
+
+            totaldellabel = Double.parseDouble(totallabel.getText());
+            cantidadfinal = getcredito - total;
+
+            if (jRadioButton2.isSelected() == true) {
+                if (getcredito >= totaldellabel) {
+                    query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
+                    Main.conexion.Insert(query);
+                    totallabel.setText("0.0");
+                    JOptionPane.showMessageDialog(null, "Venta realizada tiene que pagar: 0.0");
+                } else if (getcredito < totaldellabel) {
+                    cantidadfinal = 0.0;
+                    query = ("UPDATE CLIENTE SET credito = '" + cantidadfinal + "' WHERE NIT='" + NITCLIENTE + "'");
+                    Main.conexion.Insert(query);
+                    totallabel.setText(String.valueOf(totaldellabel - getcredito));
+                    JOptionPane.showMessageDialog(null, "Venta realizada tiene que pagar: " + (totaldellabel - getcredito));
+                }
+
+            } else if (jRadioButton1.isSelected()) {
+                JOptionPane.showMessageDialog(null, "Venta realizada tiene que pagar: " + (totaldellabel));
             }
             llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
+            jRadioButton1.setSelected(false);
+            jRadioButton2.setSelected(false);
+            totallabel.setText("");
+            cantidadtxt.setText("");
+            model = new DefaultTableModel();
+            carritotable.setModel(model);
+            model.addColumn("Codigo");
+            model.addColumn("Nombre");
+            model.addColumn("Precio");
+            model.addColumn("Cantidad");
+            clientetable.setEnabled(true);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un producto al carrito y seleccione un metodo de pago");
         }
-        jRadioButton1.setSelected(false);
-        jRadioButton2.setSelected(false);
-        totallabel.setText("");
-        cantidadtxt.setText("");
-        model = new DefaultTableModel();
-        carritotable.setModel(model);
-        model.addColumn("Codigo");
-        model.addColumn("Nombre");
-        model.addColumn("Precio");
-        model.addColumn("Cantidad");
 
     }//GEN-LAST:event_ComprarbuttonActionPerformed
 
@@ -463,6 +501,23 @@ public class CrearVenta extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         jRadioButton1.setSelected(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    /**
+     * Reestablecemos el modelo del carrito
+     * @param evt 
+     */
+    private void Comprarbutton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Comprarbutton1ActionPerformed
+        model = new DefaultTableModel();
+        carritotable.setModel(model);
+        model.addColumn("Codigo");
+        model.addColumn("Nombre");
+        model.addColumn("Precio");
+        model.addColumn("Cantidad");
+        totallabel.setText("");
+    }//GEN-LAST:event_Comprarbutton1ActionPerformed
+    /**
+     * Sumamos el total de la venta
+     */
     public void sumartotal() {
         double total = 0;
         double precio = 0;
@@ -478,6 +533,15 @@ public class CrearVenta extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo para llenar las Tablas
+     * @param filtro
+     * @param accion
+     * @param cliente
+     * @param tabla
+     * @param value
+     * @param tienda 
+     */
     public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = filtro.getText();
         String where = "";
@@ -521,6 +585,9 @@ public class CrearVenta extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Keylistener para filtrar los datos cada vez que presione una tecla
+     */
     public void Keilstener() {
         nittxt.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -593,6 +660,7 @@ public class CrearVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Comprarbutton;
+    private javax.swing.JButton Comprarbutton1;
     private javax.swing.JTextField cantidadtxt;
     private javax.swing.JTable carritotable;
     private javax.swing.JTable clientetable;

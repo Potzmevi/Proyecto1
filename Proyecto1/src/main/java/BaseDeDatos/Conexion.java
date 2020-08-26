@@ -44,6 +44,7 @@ public class Conexion {
         }
 
     }
+    
     /**
      * Obtenemos la conexion
      * @return 
@@ -144,6 +145,12 @@ public class Conexion {
         return resultado;
     }
 
+    /**
+     * Metodo para llenar las Jtables usando PreparedStatement
+     * Obteniendo los datos con un resultset y guardandolos
+     * @param query
+     * @return 
+     */
     public ResultSet Table(String query) {
         PreparedStatement stmt = null;
         try {

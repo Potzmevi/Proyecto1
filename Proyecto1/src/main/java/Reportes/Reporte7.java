@@ -146,7 +146,14 @@ public class Reporte7 extends javax.swing.JFrame {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         llenarTabla("SELECT P.codigo,P.nombre,COUNT(*) AS VENTAS FROM PRODUCTO P INNER JOIN VENTA V ON P.codigo=V.codigo_producto INNER JOIN FACTURA F ON V.codigo_factura=F.codigo GROUP BY P.codigo,F.fecha ORDER BY COUNT(*) DESC LIMIT 10", true, pedidotable, "codigo", "");
     }//GEN-LAST:event_formComponentShown
- public void CrearArchivo(JTable tabla, String titulo) {
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y
+     * el titulo de este
+     *
+     * @param tabla
+     * @param titulo
+     */
+    public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
                 PrintWriter writer = new PrintWriter("Reportes/" + Nombretxt.getText(), "UTF-8");
@@ -195,10 +202,14 @@ public class Reporte7 extends javax.swing.JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor llene el nombre del archivo");
         }
     }
+    /**
+     * Comparamos las dos fechas ingresadas para ver los productos mas vendidos en ese intervalo
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (fecha1txt.getText().length() == 0 && fecha2txt.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Por favor llene las dos fechas");
@@ -209,7 +220,7 @@ public class Reporte7 extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate fecha11 = LocalDate.parse(fecha1, formatter);
             LocalDate fecha22 = LocalDate.parse(fecha2, formatter);
-            llenarTabla("SELECT P.codigo,P.nombre,COUNT(*) AS VENTAS FROM PRODUCTO P,VENTA V,FACTURA F WHERE P.codigo=V.codigo_producto AND F.codigo=V.codigo_factura && F.fecha BETWEEN '"+fecha11 +"' AND '"+fecha22+"' GROUP BY P.codigo ORDER BY COUNT(*) DESC LIMIT 10 ", true, pedidotable, "codigo", "");
+            llenarTabla("SELECT P.codigo,P.nombre,COUNT(*) AS VENTAS FROM PRODUCTO P,VENTA V,FACTURA F WHERE P.codigo=V.codigo_producto AND F.codigo=V.codigo_factura && F.fecha BETWEEN '" + fecha11 + "' AND '" + fecha22 + "' GROUP BY P.codigo ORDER BY COUNT(*) DESC LIMIT 10 ", true, pedidotable, "codigo", "");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -217,7 +228,14 @@ public class Reporte7 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CrearArchivo(pedidotable, "10 Productos mas Vendidos:");
     }//GEN-LAST:event_jButton3ActionPerformed
-
+/**
+ * Metodo para llenar la tabla con los productos mas vendidos
+ * @param accion
+ * @param cliente
+ * @param tabla
+ * @param value
+ * @param tienda 
+ */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";

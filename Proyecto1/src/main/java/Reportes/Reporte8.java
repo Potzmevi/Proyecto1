@@ -143,6 +143,10 @@ public class Reporte8 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Comparamos las dos fechas para comparar el intervalo de tiempo
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (fecha1txt.getText().length() == 0 && fecha2txt.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Por favor llene las dos fechas");
@@ -156,6 +160,13 @@ public class Reporte8 extends javax.swing.JFrame {
             llenarTabla("SELECT P.codigo,P.nombre,COUNT(*) AS VENTAS FROM PRODUCTO P,VENTA V,FACTURA F WHERE P.codigo=V.codigo_producto AND F.codigo=V.codigo_factura && F.fecha BETWEEN '" + fecha11 + "' AND '" + fecha22 + "' && P.codigo_tienda='" + MenuEmpresa.codigoTiendaOrigen + "' GROUP BY P.codigo ORDER BY COUNT(*)  ", true, pedidotable, "codigo", "");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+    /**
+     * Metodo para Crear el reporte en html mandandole el nombre del reporte y
+     * el titulo de este
+     *
+     * @param tabla
+     * @param titulo
+     */
     public void CrearArchivo(JTable tabla, String titulo) {
         if (Nombretxt.getText().length() != 0) {
             try {
@@ -217,7 +228,14 @@ public class Reporte8 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CrearArchivo(pedidotable, "Productos mas vendidos en la tienda:");
     }//GEN-LAST:event_jButton3ActionPerformed
-
+/**
+ * Metodo para llenar la tabla con los productos mas vendidos
+ * @param accion
+ * @param cliente
+ * @param tabla
+ * @param value
+ * @param tienda 
+ */
     public void llenarTabla(String accion, boolean cliente, JTable tabla, String value, String tienda) {
         String campo = "";
         String where = "";
