@@ -154,10 +154,10 @@ public class CrearProducto extends javax.swing.JFrame {
         descripciontxt.setBorder(null);
         jPanel1.add(descripciontxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 160, 30));
 
-        jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Ingresar Producto:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setForeground(new java.awt.Color(102, 102, 102));

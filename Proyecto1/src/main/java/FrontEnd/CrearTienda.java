@@ -296,10 +296,10 @@ public class CrearTienda extends javax.swing.JFrame {
         jLabel14.setOpaque(true);
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 30, 30));
 
-        jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Ingresar TIenda:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 51, 51));

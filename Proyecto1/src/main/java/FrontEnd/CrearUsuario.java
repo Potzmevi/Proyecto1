@@ -104,7 +104,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Credito:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 80, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 60, 30));
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -130,12 +130,12 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         creditoformatted.setBackground(new java.awt.Color(153, 153, 153));
         creditoformatted.setBorder(null);
-        creditoformatted.setForeground(new java.awt.Color(102, 102, 102));
+        creditoformatted.setForeground(new java.awt.Color(51, 51, 51));
         creditoformatted.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jPanel1.add(creditoformatted, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 200, 30));
 
         codigotxt.setBackground(new java.awt.Color(153, 153, 153));
-        codigotxt.setForeground(new java.awt.Color(102, 102, 102));
+        codigotxt.setForeground(new java.awt.Color(51, 51, 51));
         codigotxt.setBorder(null);
         jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 200, 30));
 
@@ -156,7 +156,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 30, 30));
 
         telefonotxt.setBackground(new java.awt.Color(153, 153, 153));
-        telefonotxt.setForeground(new java.awt.Color(102, 102, 102));
+        telefonotxt.setForeground(new java.awt.Color(51, 51, 51));
         telefonotxt.setBorder(null);
         telefonotxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +188,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 30, 30));
 
         nittxt.setBackground(new java.awt.Color(153, 153, 153));
-        nittxt.setForeground(new java.awt.Color(102, 102, 102));
+        nittxt.setForeground(new java.awt.Color(51, 51, 51));
         nittxt.setBorder(null);
         jPanel1.add(nittxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 200, 30));
 
@@ -215,7 +215,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 30, 30));
 
         dpitxt.setBackground(new java.awt.Color(153, 153, 153));
-        dpitxt.setForeground(new java.awt.Color(102, 102, 102));
+        dpitxt.setForeground(new java.awt.Color(51, 51, 51));
         dpitxt.setBorder(null);
         dpitxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -225,7 +225,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.add(dpitxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 200, 30));
 
         direcciontxt.setBackground(new java.awt.Color(153, 153, 153));
-        direcciontxt.setForeground(new java.awt.Color(102, 102, 102));
+        direcciontxt.setForeground(new java.awt.Color(51, 51, 51));
         direcciontxt.setBorder(null);
         jPanel1.add(direcciontxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 200, 30));
 
@@ -259,41 +259,41 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel20.setText("Codigo:");
+        jLabel20.setText("* Codigo:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 70, 30));
 
         jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel21.setText(" Nombre:");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 70, 30));
+        jLabel21.setText("* Nombre:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 80, 30));
 
         jLabel22.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText(" Telefono:");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 80, 30));
+        jLabel22.setText("* Telefono:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 90, 30));
 
         jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("        NIT:");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 80, 30));
+        jLabel23.setText("NIT: ");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 40, 30));
 
         jLabel24.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("       DPI:");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 80, 30));
+        jLabel24.setText("* DPI:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 50, 30));
 
         jLabel25.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText(" Correo:");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 80, 30));
+        jLabel25.setText("* Correo:");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 70, 30));
 
         jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel26.setText(" Direccion:");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 100, 30));
+        jLabel26.setText("* Direccion:");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 90, 30));
 
         nombretxt.setBackground(new java.awt.Color(153, 153, 153));
-        nombretxt.setForeground(new java.awt.Color(102, 102, 102));
+        nombretxt.setForeground(new java.awt.Color(51, 51, 51));
         nombretxt.setBorder(null);
         nombretxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,7 +303,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.add(nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 200, 30));
 
         correotxt.setBackground(new java.awt.Color(153, 153, 153));
-        correotxt.setForeground(new java.awt.Color(102, 102, 102));
+        correotxt.setForeground(new java.awt.Color(51, 51, 51));
         correotxt.setBorder(null);
         jPanel1.add(correotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 200, 30));
 

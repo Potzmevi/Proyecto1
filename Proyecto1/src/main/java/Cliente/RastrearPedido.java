@@ -5,6 +5,21 @@
  */
 package Cliente;
 
+import BackEnd.Main;
+import FrontEnd.MenuEmpresa;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author potz
@@ -16,6 +31,8 @@ public class RastrearPedido extends javax.swing.JFrame {
      */
     public RastrearPedido() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -27,21 +44,250 @@ public class RastrearPedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        codigotxt = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        diasrestxt = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        nombretienda = new javax.swing.JLabel();
+        pagototal = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pedidotable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Rastreo de pedidos");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Direccion.png"))); // NOI18N
+        jButton1.setText("Rastrear");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 100, 30));
+
+        jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Dias Restantes:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, 120, -1));
+
+        jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Codigo.png"))); // NOI18N
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, 30));
+
+        codigotxt.setBackground(new java.awt.Color(153, 153, 153));
+        codigotxt.setForeground(new java.awt.Color(51, 51, 51));
+        codigotxt.setBorder(null);
+        jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 30));
+
+        jLabel16.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setOpaque(true);
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 30, 30));
+
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 21)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Rastreo de pedidos:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 200, -1));
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Numero de pedido:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 140, -1));
+
+        diasrestxt.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        diasrestxt.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(diasrestxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 200, 20));
+
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Pago para recoger el pedido:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, 210, -1));
+
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("TIenda donde recogerlo:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 180, 20));
+
+        nombretienda.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        nombretienda.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(nombretienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 200, 20));
+
+        pagototal.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        pagototal.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(pagototal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 200, 20));
+
+        pedidotable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(pedidotable);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 140, 860, 250));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RastreoPedidos.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //&& P.codigo ='15'"
+        llenarTabla(codigotxt, "", true, pedidotable, "codigo", "");
+        Keylstener();
+    }//GEN-LAST:event_formComponentShown
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int filaselected = pedidotable.getSelectedRow();
+        if (filaselected >= 0) {
+            String[] datos = new String[7];
+            try {
+                datos[0] = pedidotable.getValueAt(filaselected, 5).toString();
+                datos[1] = pedidotable.getValueAt(filaselected, 1).toString();
+                datos[2] = pedidotable.getValueAt(filaselected, 2).toString();
+                datos[3] = pedidotable.getValueAt(filaselected, 3).toString();
+                nombretienda.setText(datos[0]);
+                Double total = Double.parseDouble(datos[2] = pedidotable.getValueAt(filaselected, 2).toString());
+                Double anticipo = Double.parseDouble(datos[3] = pedidotable.getValueAt(filaselected, 3).toString());
+                if (anticipo >= total) {
+                    total = 0.0;
+                } else {
+                    total = total - anticipo;
+                }
+                pagototal.setText(total.toString());
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String fechapedido = datos[1];
+                LocalDate fecha1 = LocalDate.parse(fechapedido, formatter);
+                LocalDate fecha2 = LocalDate.now();
+                long diasdiferencia = DAYS.between(fecha1, fecha2);
+                diasrestxt.setText(String.valueOf(diasdiferencia));
+            } catch (Exception e) {
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un pedido");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public boolean compararRetraso(int dias, String fechape) {
+        boolean retraso = false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechapedido = fechape;
+        LocalDate fecha1 = LocalDate.parse(fechapedido, formatter);
+        LocalDate fecha2 = LocalDate.now();
+        long diasdiferencia = DAYS.between(fecha1, fecha2);
+        if ((int) diasdiferencia > dias) {
+            retraso = true;
+        } else {
+            retraso = false;
+        }
+        return retraso;
+    }
+
+    public void Keylstener() {
+        codigotxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "", true, pedidotable, "codigo", "");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "", true, pedidotable, "codigo", "");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                llenarTabla(codigotxt, "", true, pedidotable, "codigo", "");
+            }
+        });
+    }
+
+    public void llenarTabla(JTextField filtro, String accion, boolean cliente, JTable tabla, String value, String tienda) {
+        String where = "";
+        String campo = filtro.getText();
+        where = "WHERE  codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
+        try {
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            tabla.setModel(model);
+            String query = "SELECT P.codigo,P.fecha,P.total,P.anticipo,P.codigo_tienda,T.nombre,D.tiempo,X.nombre FROM PEDIDO P LEFT JOIN RECIBO R ON P.codigo = R.codigo_pedido INNER JOIN TIENDA T ON T.codigo=P.codigo_tienda2 INNER JOIN TIEMPO_TIENDA D ON (P.codigo_tienda=D.codigo_tienda2 || P.codigo_tienda = D.codigo_tienda2)&&(P.codigo_tienda2=D.codigo_tienda || P.codigo_tienda2 = D.codigo_tienda2) INNER JOIN PRODUCTO X ON X.codigo=P.codigo_producto WHERE R.ID IS NULL && P.codigo LIKE '%" + campo + "%'";
+            ResultSet Result = Main.conexion.ComboBox(query);
+            ResultSetMetaData rsMd = Result.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+            model.addColumn("Codigo");
+            model.addColumn("Fecha");
+            model.addColumn("Total");
+            model.addColumn("Anticipo");
+            model.addColumn("Tienda 1");
+            model.addColumn("Tienda Destino");
+            model.addColumn("Tiempo");
+            model.addColumn("Nombre Producto");
+            int[] diastabla = new int[500];
+            String[] fecha = new String[500];
+            int contador = 0;
+            while (Result.next()) {
+                diastabla[contador] = Integer.parseInt(Result.getObject("tiempo").toString());
+                fecha[contador] = Result.getObject("fecha").toString();
+
+                Object[] filas = new Object[cantidadColumnas];
+                if (compararRetraso(diastabla[contador], fecha[contador])) {
+
+                    for (int i = 0; i < cantidadColumnas; i++) {
+
+                        filas[i] = Result.getObject(i + 1);
+
+                    }
+                    model.addRow(filas);
+                }
+
+                contador++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -79,5 +325,21 @@ public class RastrearPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField codigotxt;
+    private javax.swing.JLabel diasrestxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel nombretienda;
+    private javax.swing.JLabel pagototal;
+    private javax.swing.JTable pedidotable;
     // End of variables declaration//GEN-END:variables
 }

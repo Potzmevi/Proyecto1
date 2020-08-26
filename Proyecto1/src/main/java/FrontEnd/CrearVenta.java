@@ -443,7 +443,10 @@ public class CrearVenta extends javax.swing.JFrame {
             }
             llenarTabla(nittxt, "SELECT NIT, nombre, credito FROM CLIENTE ", true, clientetable, "NIT", "");
         }
-
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        totallabel.setText("");
+        cantidadtxt.setText("");
         model = new DefaultTableModel();
         carritotable.setModel(model);
         model.addColumn("Codigo");

@@ -22,8 +22,8 @@ public class Main {
     public static Conexion conexion = new Conexion();
         
     public static void main(String[] args) {
-        Login login = new Login();
-        login.setVisible(true);
+        Ingresar ingresar = new Ingresar();
+        ingresar.setVisible(true);
         conexion.conexionDB();
     }
 }

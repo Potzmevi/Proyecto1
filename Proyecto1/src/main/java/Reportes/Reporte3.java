@@ -211,7 +211,7 @@ public class Reporte3 extends javax.swing.JFrame {
             String query = "SELECT P.*,T.tiempo FROM PEDIDO P INNER JOIN TIEMPO_TIENDA T ON (P.codigo_tienda=T.codigo_tienda || P.codigo_tienda = T.codigo_tienda2)&&(P.codigo_tienda2=T.codigo_tienda || P.codigo_tienda2 = T.codigo_tienda2) LEFT JOIN RECIBO R ON P.codigo=R.codigo_pedido WHERE R.ID IS NULL && P.codigo_tienda2='" + MenuEmpresa.codigoTiendaOrigen + "'";
             ResultSet Result = Main.conexion.ComboBox(query);
             ResultSetMetaData rsMd = Result.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
+                int cantidadColumnas = rsMd.getColumnCount();
             model.addColumn("Codigo");
             model.addColumn("Fecha");
             model.addColumn("Cantidad");
@@ -222,8 +222,8 @@ public class Reporte3 extends javax.swing.JFrame {
             model.addColumn("Tienda 1");
             model.addColumn("Tienda 2");
             model.addColumn("Tiempo");
-            int[] diastabla = new int[100];
-            String[] fecha = new String[100];
+            int[] diastabla = new int[500];
+            String[] fecha = new String[500];
             int contador = 0;
             while (Result.next()) {
                 diastabla[contador] = Integer.parseInt(Result.getObject("tiempo").toString());

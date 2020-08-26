@@ -61,9 +61,8 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconoCandado.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, 30));
 
-        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel7.setBackground(new java.awt.Color(102, 102, 102));
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("jLabel5");
         jLabel7.setOpaque(true);
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 30, 30));
 
@@ -79,8 +78,8 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 100, 30));
 
-        jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setForeground(new java.awt.Color(102, 102, 102));
+        jPasswordField1.setBackground(new java.awt.Color(102, 102, 102));
+        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setBorder(null);
         jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,9 +98,9 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Ingrese codigo de empleado:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 210, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoInterfaz.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoTiempo.jpg"))); // NOI18N
         jLabel1.setText("Fondo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 626, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 626, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

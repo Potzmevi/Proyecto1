@@ -5,6 +5,8 @@
  */
 package FrontEnd;
 
+import Cliente.MenuCliente;
+
 /**
  *
  * @author potz
@@ -16,6 +18,8 @@ public class Ingresar extends javax.swing.JFrame {
      */
     public Ingresar() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -51,7 +55,7 @@ public class Ingresar extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 120, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -66,8 +70,8 @@ public class Ingresar extends javax.swing.JFrame {
         });
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 160, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoInterfaz.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 410));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FondoMenuCliente.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,16 +81,17 @@ public class Ingresar extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jComboBox1.getSelectedItem().equals("CLiente")) {
-            
-        } else if(jComboBox1.getSelectedItem().equals("Trabajador")){
+        if (jComboBox1.getSelectedItem().equals("Cliente")) {
+            MenuCliente cliente = new MenuCliente();
+            cliente.setVisible(true);
+        } else if (jComboBox1.getSelectedItem().equals("Trabajador")) {
             Login login = new Login();
             login.setVisible(true);
         }
