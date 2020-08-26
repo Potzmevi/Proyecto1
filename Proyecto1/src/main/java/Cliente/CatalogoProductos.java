@@ -75,7 +75,7 @@ public class CatalogoProductos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(productotable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 800, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 800, 290));
 
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
