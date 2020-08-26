@@ -25,6 +25,8 @@ public class CrearTiempo extends javax.swing.JFrame {
      */
     public CrearTiempo() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**

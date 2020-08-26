@@ -20,6 +20,8 @@ public class CrearProducto extends javax.swing.JFrame {
      */
     public CrearProducto() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**

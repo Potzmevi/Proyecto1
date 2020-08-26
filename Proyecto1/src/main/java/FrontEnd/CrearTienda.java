@@ -20,6 +20,8 @@ public class CrearTienda extends javax.swing.JFrame {
      */
     public CrearTienda() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**

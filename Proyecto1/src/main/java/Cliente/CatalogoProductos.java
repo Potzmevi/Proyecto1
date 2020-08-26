@@ -45,8 +45,8 @@ public class CatalogoProductos extends javax.swing.JFrame {
         productotable = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         ordercombo = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         codigotxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -87,15 +87,15 @@ public class CatalogoProductos extends javax.swing.JFrame {
         ordercombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
         jPanel1.add(ordercombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 170, 30));
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Ordenar de manera:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
-
         codigotxt.setBackground(new java.awt.Color(153, 153, 153));
         codigotxt.setForeground(new java.awt.Color(51, 51, 51));
         codigotxt.setBorder(null);
         jPanel1.add(codigotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 250, 30));
+
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Ordenar de manera:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
 
         jLabel16.setBackground(new java.awt.Color(153, 153, 153));
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
